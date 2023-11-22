@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:49:12 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 14:52:34 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/22 16:25:22 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ char	*get_path(char *cmd, char **env)
 		free(path);
 		path = NULL;
 	}
-	ft_free_str_array((void **)possible_paths);
+	ft_free_array((void **)possible_paths);
 	return (path);
 }
 
-void	ft_free_str_array(char **array)
+void	ft_free_array(void **array)
 {
 	int	i;
 
@@ -49,4 +49,5 @@ void	ft_free_str_array(char **array)
 	while (array[i])
 		free(array[i++]);
 	free (array);
+	array = NULL;
 }
