@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   echo.c                                             :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 16:17:43 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 18:43:05 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/22 18:51:00 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int	ft_echo(char **cmd)
+int	ft_pwd(char **cmd)
 {
-	int		i;
-	bool	print_nl;
+	char	cwd[128]; // random buffer size
 
-	if (ft_strncmp(cmd[0], "echo", 5) != 0)
+	if (ft_strncmp(cmd[0], "pwd", 4) != 0)
 		return (Bad_argument()); //to implement
-	if (!cmd[1])
+	if (getcwd(cwd, 128))
 	{
-		write(1, "\n", 1);
+		ft_putendl_fd(cwd, 1);
 		return (EXIT_SUCCESS);
 	}
-	i = 1;
-	print_nl = true;
-	while (ft_strncmp(cmd[i], "-n", 3) == 0)
+	else
 	{
-		print_nl = false;
-		i++;
+		perror("pwd error:");
+		return (EXIT_FAILURE); // Revise return value
 	}
-	while (cmd[i])
-		ft_putstr_fd(cmd[i++], 1); // add printing " " depending on how cmd argument is received
-	if (print_nl)
-		write(1, "\n", 1);
-	return (EXIT_SUCCESS);
 }
