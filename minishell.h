@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 14:52:24 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/22 15:30:45 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,6 @@
 char	*get_path(char *cmd, char **env); // first parameter is the command without flags
 
 // Memory handling
-void	ft_free_array(void **array)
-{
-	int	i;
-
-	i = 0;
-	while (array[i])
-		free(array[i++]);
-	free (array);
-}
+void	ft_free_array(void **array);
 
 #endif
