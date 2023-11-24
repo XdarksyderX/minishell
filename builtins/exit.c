@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:22:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/23 14:53:42 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:02:53 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	ft_exit(char **cmd)
 	int	i;
 
 	if (ft_strncmp(cmd[0], "exit", 5) != 0)
-		return (Bad_argument()); //to implement
+		return (bad_argument()); //to implement
 	ft_putendl_fd("exit", 1);
 	i = 1;
 	while (cmd[i])

@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/23 18:56:58 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:02:56 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 int		ft_echo(char **cmd); // Single and multiple -n handled, "" and '' parsing not taken into account
 int		ft_exit(char **cmd); // Copies bash functinality except when a number outside LONG range is entered
 int		ft_pwd(char **cmd);
+int		ft_cd(char **cmd); // Cd with and without arguments implmented (not cd '-')
 
 
 // Path and ENV utils

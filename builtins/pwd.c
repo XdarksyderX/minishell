@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 18:51:00 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/24 14:02:56 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_pwd(char **cmd)
 	char	cwd[128]; // random buffer size
 
 	if (ft_strncmp(cmd[0], "pwd", 4) != 0)
-		return (Bad_argument()); //to implement
+		return (bad_argument()); //to implement
 	if (getcwd(cwd, 128))
 	{
 		ft_putendl_fd(cwd, 1);
