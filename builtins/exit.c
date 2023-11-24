@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:22:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/24 14:02:53 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/24 15:50:12 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,14 @@ int	ft_exit(char **cmd)
 		exit_handler(0); // to implement, 0 = exit status
 	else if (exit_syntax_error(cmd[1]))
 	{
-		ft_putstr_fd("bash: exit: ", 1);
-		ft_putstr_fd(cmd[1], 1);
-		ft_putendl_fd(": numeric argument required");
+		ft_putstr_fd("bash: exit: ", 2);
+		ft_putstr_fd(cmd[1], 2);
+		ft_putendl_fd(": numeric argument required", 2);
 		exit_handler(255); // to implement, 255 = exit status
 	}
 	else if (i != 2)
 	{
-		ft_putendl_fd("bash: exit: too many arguments", 1);
+		ft_putendl_fd("bash: exit: too many arguments", 2);
 		return (EXIT_SUCCESS); // Weird behaviour but replicates bash, does not exit if 1 arg is numeric and there are too many args
 	}
 	else
