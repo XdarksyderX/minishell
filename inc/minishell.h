@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/24 14:43:50 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/25 15:49:49 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,5 @@
 
 # include "builtins.h"
 # include "shell.h"
-
 
 #endif

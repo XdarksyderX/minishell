@@ -6,13 +6,13 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:22:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/24 15:50:12 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/25 12:33:13 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/builtins.h"
 
-void ft_exit(void)
+void	ft_exit(void)
 {
 	exit(EXIT_SUCCESS);
 }
