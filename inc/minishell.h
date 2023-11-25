@@ -20,17 +20,8 @@
 # include <sys/wait.h>
 # include <fcntl.h>
 
-// builtins
-int		ft_echo(char **cmd); // Single and multiple -n handled, "" and '' parsing not taken into account
-int		ft_exit(char **cmd); // Copies bash functinality except when a number outside LONG range is entered
-int		ft_pwd(char **cmd);
-int		ft_cd(char **cmd); // Cd with and without arguments implmented (not cd '-')
-int		ft_env(char	**cmd, char **env); // A lot of functionality to correctly pass the env variable still needed
+# include "builtins.h"
+# include "shell.h"
 
-// Path and ENV utils
-char	*get_path(char *cmd, char **env); // first parameter is the command without flags
-
-// Memory handling
-void	ft_free_array(void **array);
 
 #endif

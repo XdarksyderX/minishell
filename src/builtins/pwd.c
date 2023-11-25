@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/19 16:30:11 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 12:28:31 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/24 14:02:56 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long long	ft_atoi(const char *str)
-{
-	int			i;
-	int			sign;
-	long long	num;
+#include "../../inc/builtins.h"
 
-	sign = 1;
-	i = 0;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
-		|| str[i] == '\v' || str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '-')
+
+//Use getcwd with NULL and 0 to dynamically allocate
+int	ft_pwd(void)
+{
+	char	*cwd;
+	int		status;
+
+	cwd = getcwd(NULL, 0);
+	if (cwd != NULL)
 	{
-		sign = -1;
-		i++;
+		printf("%s\n", cwd);
+		free(cwd);
+		status = EXIT_SUCCESS;
 	}
-	else if (str[i] == '+')
-		i++;
-	num = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	else
 	{
-		num = num * 10 + str[i] - '0';
-		i++;
+		perror("Error");
+		status = EXIT_FAILURE;
 	}
-	return (num * sign);
+	return (status);
 }

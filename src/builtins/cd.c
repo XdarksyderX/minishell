@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:19:13 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 16:15:47 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/11/24 13:14:00 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/24 14:02:54 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../inc/builtins.h"
 
-int	main(int argc, char **argv, char **env)
+int	ft_cd(char *dir)
 {
-	if (argc != 1)
+	if (dir == NULL || dir[0] == '\0')
 	{
-		printf("This program does not accept arguments\n");
-		exit(0);
+		if (chdir(getenv("HOME")) == -1)
+		{
+			perror("Error");
+			return (EXIT_FAILURE);
+		}
 	}
+	else if (chdir(dir) == -1)
+	{
+		perror("Error");
+		return (EXIT_FAILURE);
+	}
+	ft_update_env(ft_strjoin("PWD=", getcwd(NULL, 0)));
+	return (EXIT_SUCCESS);
 }

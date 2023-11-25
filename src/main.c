@@ -1,31 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/24 14:02:56 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/11/22 14:19:13 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/22 16:15:47 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../inc/minishell.h"
 
-int	ft_pwd(char **cmd)
+t_shell g_shell;
+
+int	main(int argc, char **argv, char **env)
 {
-	char	cwd[128]; // random buffer size
-
-	if (ft_strncmp(cmd[0], "pwd", 4) != 0)
-		return (bad_argument()); //to implement
-	if (getcwd(cwd, 128))
+	if (argc != 1)
 	{
-		ft_putendl_fd(cwd, 1);
-		return (EXIT_SUCCESS);
-	}
-	else
-	{
-		perror("pwd error:");
-		return (EXIT_FAILURE); // Revise return value
+		printf("This program does not accept arguments\n");
+		exit(1);
 	}
 }
