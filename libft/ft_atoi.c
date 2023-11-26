@@ -6,11 +6,11 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/19 16:30:11 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 12:28:31 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:25:37 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-long long	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int			i;
 	int			sign;

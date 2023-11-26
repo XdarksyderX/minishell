@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:35:31 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/25 16:48:08 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:25:02 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	ft_free_g_shell(void)
 	ft_free_array((void **)g_shell.env);
 	ft_free_array((void **)g_shell.path);
 }
-
