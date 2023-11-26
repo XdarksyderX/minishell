@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/26 14:42:36 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/10/15 18:10:36 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/26 14:42:43 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef PIPEX_H
+# define PIPEX_H
 
-# include "libft/libft.h"
-# include <stdbool.h>
-# include <limits.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-
-# include "builtins.h"
-# include "shell.h"
-# include "pipex.h"
+int		child_process(char **av, char **env, int fd[2]);
+int		parent_process(char **av, char **env, int fd[2]);
+int		exec_cmd(char *str_cmd, char **env);
+char	*get_path(char *cmd, char **env);
 
 #endif
