@@ -16,7 +16,7 @@ int	ft_cd(char *dir)
 {
 	if (dir == NULL || dir[0] == '\0')
 	{
-		if (chdir(getenv("HOME")) == -1)
+		if (chdir(ft_getenv("HOME")) == -1)
 		{
 			perror("Error");
 			return (EXIT_FAILURE);
@@ -27,6 +27,6 @@ int	ft_cd(char *dir)
 		perror("Error");
 		return (EXIT_FAILURE);
 	}
-	ft_update_env(ft_strjoin("PWD=", getcwd(NULL, 0)));
+	ft_setenv(ft_strjoin("PWD=", getcwd(NULL, 0)));
 	return (EXIT_SUCCESS);
 }

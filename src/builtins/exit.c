@@ -12,7 +12,7 @@
 
 #include "../../inc/builtins.h"
 
-void ft_exit(void)
+void	ft_exit(void)
 {
 	exit(EXIT_SUCCESS);
 }
