@@ -6,12 +6,11 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/24 14:02:56 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/26 14:25:56 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/builtins.h"
-
 
 //Use getcwd with NULL and 0 to dynamically allocate
 int	ft_pwd(void)
