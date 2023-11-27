@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/26 14:42:36 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:16:37 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,12 @@
 # include <signal.h>
 # include <sys/wait.h>
 # include <fcntl.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
 # include "builtins.h"
 # include "shell.h"
 # include "pipex.h"
+# include "parser.h"
 
 #endif
