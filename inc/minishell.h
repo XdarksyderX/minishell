@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/27 13:16:37 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/27 13:41:41 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@
 # include "shell.h"
 # include "pipex.h"
 # include "parser.h"
+# include "debug.h"
 
 #endif
