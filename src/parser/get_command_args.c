@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_command_args.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/27 12:35:15 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/11/27 12:35:16 by vnaslund         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/parser.h"
 
 static int	count_args_before_redirection(char *line)
@@ -39,13 +51,13 @@ static void	extract_args(char *line, char **args)
 		if (line[i] == ' ' || line[i] == '\0')
 		{
 			if (i > start)
-				args[j++] = strndup(line + start, i - start);
+				args[j++] = ft_strndup(line + start, i - start);
 			start = i + 1;
 		}
 		i++;
 	}
 	if (i > start)
-		args[j++] = strndup(line + start, i - start);
+		args[j++] = ft_strndup(line + start, i - start);
 	args[j] = NULL;
 }
 
