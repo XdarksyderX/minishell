@@ -6,14 +6,14 @@
 #    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/11/27 13:39:57 by vnaslund         ###   ########.fr        #
+#    Updated: 2023/11/29 15:08:14 by vnaslund         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SOURCES = src/main.c src/parser/get_command_args.c src/parser/parse_commands.c \
-		  src/parser/split_commands.c src/debug/print_cmd_list.c
+		  src/parser/split_commands.c src/debug/print_cmd_list.c src/helpers/mem.c
 
 OBJECTS = $(SOURCES:.c=.o)
 
