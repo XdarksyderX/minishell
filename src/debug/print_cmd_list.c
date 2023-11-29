@@ -9,7 +9,7 @@ void	debug_print_command(t_command *cmd)
 		printf("Command Details:\n");
 		printf("  Args");
 		while (cmd->args[i])
-			printf(": %s\n", cmd->args[i]);
+			printf(": %s\n", cmd->args[i++]);
 		printf("  Path: %s\n", cmd->path);
 		printf("  Infile: %s\n", cmd->infile);
 		printf("  Outfile: %s\n", cmd->outfile);
