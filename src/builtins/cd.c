@@ -6,27 +6,42 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 13:14:00 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/26 14:26:47 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/11/30 15:02:31 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/builtins.h"
+#include "../../inc/minishell.h"
 
-int	ft_cd(char *dir)
+static int	cd_to_home(void)
 {
-	if (dir == NULL || dir[0] == '\0')
+	char	*path_to_home;
+
+	path_to_home = getenv("HOME"); // Is getenv allowed?
+	if (!path_to_home)
 	{
-		if (chdir(ft_getenv("HOME")) == -1)
-		{
-			perror("Error");
-			return (EXIT_FAILURE);
-		}
-	}
-	else if (chdir(dir) == -1)
-	{
-		perror("Error");
+		ft_putendl_fd("cd: HOME not set", 2);
 		return (EXIT_FAILURE);
 	}
-	ft_setenv(ft_strjoin("PWD=", getcwd(NULL, 0)));
-	return (EXIT_SUCCESS);
+	if (chdir(path_to_home) == -1)
+	{
+		perror("cd");
+		return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_SUCCESS);
+}
+
+int	ft_cd(char **cmd)
+{
+	//if (ft_strncmp(cmd[0], "cd", 3) != 0)
+	//	return (bad_argument()); //to implement
+	if (!cmd[1])
+		return (cd_to_home());
+	if (chdir(cmd[1]) == -1)
+	{
+		perror("cd");
+		return (EXIT_FAILURE);
+	}
+	else
+		return (EXIT_SUCCESS);
 }

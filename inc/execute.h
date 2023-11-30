@@ -5,5 +5,6 @@
 # include "pipex.h"
 
 void	start_minishell(t_command *cmd_list, char **env);
+bool	ft_isbuiltin(char *cmd);
 
 #endif
