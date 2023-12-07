@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/29 16:28:31 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/07 11:07:36 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ int	exec_cmd(char *str_cmd, char **env)
 		perror("Cmd error");
 		return (EXIT_FAILURE);
 	}
-	path = get_path(cmd_wflags[0], env);
+	if (ft_strchr(cmd_wflags[0], '/'))
+		path = cmd_wflags[0];
+	else
+		path = get_path(cmd_wflags[0], env);
 	if (path == NULL)
 	{
 		ft_free_array((void **)cmd_wflags);
