@@ -1,4 +1,4 @@
-#include "inc/minishell.h"
+#include "../../inc/minishell.h"
 
 void	debug_print_command(t_command *cmd)
 {

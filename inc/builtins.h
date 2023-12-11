@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:49:25 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/30 14:57:38 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:13:19 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdbool.h>
 # include <limits.h>
 # include <signal.h>

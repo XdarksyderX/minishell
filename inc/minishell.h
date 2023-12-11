@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/29 17:23:44 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:13:03 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft/libft.h"
+# include "../libft/libft.h"
 # include <stdbool.h>
 # include <limits.h>
 # include <signal.h>

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:20:47 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/01 16:54:59 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:14:11 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,5 @@ void	start_minishell(t_command *cmd_list, char **env)
 		wait(NULL);
 		free(input);
 	}
+	(void) cmd_list;
 }

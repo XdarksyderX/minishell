@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:11:34 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 12:23:16 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/11 15:14:31 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ size_t	ft_strlcat(char *dest, const char *src, size_t dstsize)
 	size_t	dest_len;
 	size_t	total_len;
 	size_t	i;
-	size_t	j;
 
-	j = 0;
 	dest_len = 0;
 	while (dest[dest_len] && dest_len < dstsize)
 		dest_len++;

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
+#    By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/11/30 16:22:14 by vnaslund         ###   ########.fr        #
+#    Updated: 2023/12/11 15:12:32 by xdarksyderx      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ SOURCES = src/main.c src/parser/get_command_args.c src/parser/parse_commands.c \
 		  src/execution/builtin_handler.c src/builtins/cd.c \
 		  src/builtins/exit.c src/builtins/pwd.c  src/builtins/echo.c
 
-OBJECTS = $(SOURCES:.c=.o)
+OBJ_DIR = obj/
+OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I/libft
@@ -31,11 +32,15 @@ all: $(NAME)
 $(NAME): $(OBJECTS) $(LIBFT)
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) -lreadline $(LIBFT)
 
+$(OBJ_DIR)%.o: %.c
+	@mkdir -p $(@D)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 clean:
-	rm -f $(OBJECTS)
+	rm -rf $(OBJ_DIR)
 	@$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
