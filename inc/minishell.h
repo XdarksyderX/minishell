@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>	+#+  +:+       +#+		  */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:21:53 by vnaslund          #+#    #+#             */
 /*   Updated: 2023/12/11 15:13:03 by xdarksyderx      ###   ########.fr       */

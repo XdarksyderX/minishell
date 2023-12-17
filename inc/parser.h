@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:38:04 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/27 13:18:02 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/15 23:38:26 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include "shell.h"
 # include "builtins.h"
 
-char		**ft_split_commands(char *line);
-char		**extract_command_and_args(char *line);
-t_command	*ft_get_command_list(char *line);
+char	**create_args_array(char **tokens, int arg_count);
+void	fill_default_redirections(t_command *cmd_list);
 
 #endif
