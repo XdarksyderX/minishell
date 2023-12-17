@@ -64,7 +64,7 @@ int	exec_cmd(char *str_cmd, char **env)
 	}
 	if (execve(path, cmd_wflags, env) == -1)
 	{
-		free(path);
+		free(path); // Double free if it is a cmd:s absolute path
 		ft_free_array((void **)cmd_wflags);
 		perror("Execve error");
 		return (EXIT_FAILURE);
