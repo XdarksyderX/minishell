@@ -25,7 +25,7 @@ char	**create_args_array(char **tokens, int arg_count)
 	{
 		if (ft_strncmp(tokens[i], ">", 1)
 			!= 0 && ft_strncmp(tokens[i], "<", 1) != 0
-			&& strcmp(tokens[i], "2>") != 0)
+			&& strcmp(tokens[i], "2>") != 0) // make ft_strcmp or just ft_strncmp and 3 as last param
 			args[j++] = ft_strdup(tokens[i]);
 	}
 	args[j] = NULL;
