@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:38:04 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/15 23:38:26 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2023/12/18 12:13:39 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include "shell.h"
 # include "builtins.h"
 
-char	**create_args_array(char **tokens, int arg_count);
-void	fill_default_redirections(t_command *cmd_list);
+t_command	*ft_create_command_list(char *input);
+t_command	*ft_create_command(char *command);
+t_command	*ft_add_command(t_command *cmd_list, char *command);
+void		handle_redirection(t_command *cmd, char **tokens, int *i);
+char		**create_args_array(char **tokens, int arg_count);
+void		fill_default_redirections(t_command *cmd_list);
 
 #endif

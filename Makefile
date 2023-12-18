@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+         #
+#    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/12/11 15:17:03 by xdarksyderx      ###   ########.fr        #
+#    Updated: 2023/12/18 12:26:37 by vnaslund         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SOURCES = src/main.c src/parser/get_command_args.c src/parser/parse_commands.c \
-		  src/parser/split_commands.c src/debug/print_cmd_list.c src/helpers/mem.c \
+SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
+		  src/debug/print_cmd_list.c src/helpers/mem.c \
 		  src/execution/exec_cmd.c src/execution/start_minishell.c \
 		  src/execution/builtin_handler.c src/builtins/cd.c \
 		  src/builtins/exit.c src/builtins/pwd.c  src/builtins/echo.c
@@ -22,7 +22,7 @@ OBJ_DIR = obj/
 OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I/libft
+CFLAGS = -Wall -Wextra -Werror -I/libft -g
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

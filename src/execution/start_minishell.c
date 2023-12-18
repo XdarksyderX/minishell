@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   start_minishell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:20:47 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/11 15:17:03 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2023/12/18 12:25:32 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	start_minishell(t_command *cmd_list, char **env)
 			add_history(input);
 		else
 			continue ;
-		cmd_list = ft_get_command_list(input);
+		cmd_list = ft_create_command_list(input);
 		if (ft_isbuiltin(input))
 			continue ;
-		//debug_print_cmd_list(cmd_list);
+		debug_print_cmd_list(cmd_list);
 		pid = fork();
 		if (pid == 0)
 		{

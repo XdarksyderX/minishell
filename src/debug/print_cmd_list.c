@@ -7,13 +7,13 @@ void	debug_print_command(t_command *cmd)
 	if (cmd)
 	{
 		printf("Command Details:\n");
+		printf("  Command: %s\n", cmd->command);
 		printf("  Args");
 		while (cmd->args[i])
 			printf(": %s\n", cmd->args[i++]);
-		printf("  Path: %s\n", cmd->path);
-		printf("  Infile: %s\n", cmd->infile);
-		printf("  Outfile: %s\n", cmd->outfile);
-		printf("  Errfile: %s\n", cmd->errfile);
+		printf("  Stdin redirect: %s\n", cmd->stdin_redirect);
+		printf("  Stdout redirect: %s\n", cmd->stdout_redirect);
+		printf("  Stderr redirect: %s\n", cmd->stderr_redirect);
 		printf("\n");
 	}
 }

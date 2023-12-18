@@ -4,17 +4,16 @@ t_command	*ft_create_command_list(char *input)
 {
 	t_command	*cmd_list;
 	char		**commands;
-	char		**unparsed_commands;
 	int			i;
 
 	i = 0;
-	unparsed_commands = ft_split(input, '|');
+	commands = ft_split(input, '|');
 	while (commands[i])
 	{
 		cmd_list = ft_add_command(cmd_list, commands[i]);
 		i++;
 	}
-	ft_default_redirections(cmd_list);
+	fill_default_redirections(cmd_list);
 	return (cmd_list);
 }
 
