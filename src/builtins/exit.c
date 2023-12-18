@@ -41,8 +41,7 @@ long long	ft_atoi_longlong(const char *str)
 
 static int	exit_syntax_error(char *str)
 {
-	long long	num;
-	int			i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\n'
@@ -60,7 +59,6 @@ static int	exit_syntax_error(char *str)
 		i++;
 	if (str[i] != '\0')
 		return (1);
-	num = ft_atoi_longlong(str);
 	return (0);
 }
 
