@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 11:38:30 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/22 12:23:29 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/18 12:29:50 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	int		i;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	ret = (char *)malloc(sizeof(char) * (ft_strlen((char *)s1) + 1));
 	if (!(ret))
 	{
