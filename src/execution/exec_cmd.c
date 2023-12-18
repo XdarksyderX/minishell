@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 16:19:48 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/18 18:25:04 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,44 @@ char	*get_path(char *cmd, char **env)
 	return (path);
 }
 
-int	exec_cmd(char **cmd_wargs, char **env)
+void	setup_redirection(t_command *cmd)
+{
+	int	fd_out;
+	int	fd_in;
+	//int	fd_err;
+
+	if (ft_strncmp(cmd->stdout_redirect, "/dev/stdout", 12))
+	{
+		fd_out = open(cmd->stdout_redirect, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (fd_out == -1)
+		{
+			perror("outfile open");
+			exit(EXIT_FAILURE);
+		}
+		printf("STDOUT REDIRECTION\n");
+		dup2(fd_out, STDOUT_FILENO);
+		close(fd_out);
+	}
+	if (ft_strncmp(cmd->stdin_redirect, "/dev/stdin", 11))
+	{
+		fd_in = open(cmd->stdin_redirect, O_RDONLY);
+		if (fd_in == -1)
+		{
+			perror("infile open");
+			exit(EXIT_FAILURE);
+		}
+		printf("STDIN REDIRECTION\n");
+		dup2(fd_in, STDIN_FILENO);
+		close(fd_in);
+	}
+}
+
+int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 {
 	char	*path;
 	bool	path_allocated;
 
+	setup_redirection(cmd_list);
 	if (ft_isbuiltin(cmd_wargs))
 		return (EXIT_SUCCESS);
 	if (ft_strchr(cmd_wargs[0], '/'))

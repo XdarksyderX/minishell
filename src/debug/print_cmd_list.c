@@ -4,6 +4,11 @@ void	debug_print_command(t_command *cmd)
 {
 	int	i = 0;
 
+	if (!cmd)
+	{
+		printf("cmd is NULL\n");
+		return ;
+	}
 	if (cmd)
 	{
 		printf("Command Details:\n");
@@ -23,7 +28,7 @@ void	debug_print_cmd_list(t_command *cmd_list)
 	t_command	*current = cmd_list;
 
 	printf("Command List:\n");
-	while (current != NULL)
+	while (current)
 	{
 		debug_print_command(current);
 		current = current->next;
