@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:22:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/30 15:03:28 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:18:29 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ static int	exit_syntax_error(char *str)
 	if (str[i] != '\0')
 		return (1);
 	num = ft_atoi_longlong(str);
-	if (num > LONG_MAX || num < LONG_MIN) // Comparison doesn't work for some reason !?!
-		return (1); // LONG and LONG LONG have the same range so this code is redundant. I dont know another way to handle it like bash does.
 	return (0);
 }
 
@@ -76,20 +74,18 @@ int	ft_exit(char **cmd)
 {
 	int	i;
 
-	//if (ft_strncmp(cmd[0], "exit", 5) != 0)
-	//	return (bad_argument()); //to implement
 	ft_putendl_fd("exit", 1);
 	i = 1;
 	while (cmd[i])
 		i++;
 	if (i == 1)
-		exit_handler(0); // to implement, 0 = exit status
+		exit_handler(0);
 	else if (exit_syntax_error(cmd[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(cmd[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit_handler(255); // to implement, 255 = exit status
+		exit_handler(255);
 	}
 	else if (i != 2)
 	{

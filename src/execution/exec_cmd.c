@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/07 11:07:36 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:19:48 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,31 +41,31 @@ char	*get_path(char *cmd, char **env)
 	return (path);
 }
 
-int	exec_cmd(char *str_cmd, char **env)
+int	exec_cmd(char **cmd_wargs, char **env)
 {
-	char	**cmd_wflags;
 	char	*path;
+	bool	path_allocated;
 
-	cmd_wflags = ft_split(str_cmd, ' ');
-	if (cmd_wflags == NULL)
-	{
-		perror("Cmd error");
-		return (EXIT_FAILURE);
-	}
-	if (ft_strchr(cmd_wflags[0], '/'))
-		path = cmd_wflags[0];
+	if (ft_isbuiltin(cmd_wargs))
+		return (EXIT_SUCCESS);
+	if (ft_strchr(cmd_wargs[0], '/'))
+		path = cmd_wargs[0];
 	else
-		path = get_path(cmd_wflags[0], env);
-	if (path == NULL)
 	{
-		ft_free_array((void **)cmd_wflags);
+		path = get_path(cmd_wargs[0], env);
+		path_allocated = true;
+	}
+	if (path == NULL) // redundant?
+	{
+		ft_free_array((void **)cmd_wargs);
 		perror("Cmd not found");
 		return (EXIT_FAILURE);
 	}
-	if (execve(path, cmd_wflags, env) == -1)
+	if (execve(path, cmd_wargs, env) == -1)
 	{
-		free(path); // Double free if it is a cmd:s absolute path
-		ft_free_array((void **)cmd_wflags);
+		if (path_allocated)
+			free(path);
+		ft_free_array((void **)cmd_wargs);
 		perror("Execve error");
 		return (EXIT_FAILURE);
 	}

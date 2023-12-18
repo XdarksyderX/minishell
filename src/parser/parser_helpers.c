@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_helpers.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/18 16:32:49 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/12/18 16:48:46 by vnaslund         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/parser.h"
 
 void	handle_redirection(t_command *cmd, char **tokens, int *i)
@@ -6,7 +18,7 @@ void	handle_redirection(t_command *cmd, char **tokens, int *i)
 		cmd->stdout_redirect = ft_strdup(tokens[++(*i)]);
 	else if (ft_strncmp(tokens[*i], "<", 1) == 0)
 		cmd->stdin_redirect = ft_strdup(tokens[++(*i)]);
-	else if (ft_strncmp(tokens[*i], "2>", 1) == 0)
+	else if (ft_strncmp(tokens[*i], "2>", 2) == 0) // Changed last arg from 1 to 2 to avoid segfault
 		cmd->stderr_redirect = ft_strdup(tokens[++(*i)]);
 }
 
@@ -25,7 +37,7 @@ char	**create_args_array(char **tokens, int arg_count)
 	{
 		if (ft_strncmp(tokens[i], ">", 1)
 			!= 0 && ft_strncmp(tokens[i], "<", 1) != 0
-			&& ft_strncmp(tokens[i], "2>", 3) != 0)
+			&& ft_strncmp(tokens[i], "2>", 3) != 0) // make ft_strcmp
 			args[j++] = ft_strdup(tokens[i]);
 	}
 	args[j] = NULL;

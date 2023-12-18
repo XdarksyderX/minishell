@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:20:47 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 12:25:32 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/18 16:31:00 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,19 @@ void	start_minishell(t_command *cmd_list, char **env)
 		else
 			continue ;
 		cmd_list = ft_create_command_list(input);
-		if (ft_isbuiltin(input))
+		free(input);
+		if (!ft_strncmp(cmd_list->args[0], "exit", 5))
+		{
+			ft_exit(cmd_list->args);
 			continue ;
-		debug_print_cmd_list(cmd_list);
+		}
+		//debug_print_cmd_list(cmd_list);
 		pid = fork();
 		if (pid == 0)
 		{
-			exec_cmd(input, env);
+			exec_cmd(cmd_list->args, env);
 			exit(0);
 		}
 		wait(NULL);
-		free(input);
 	}
-	(void) cmd_list;
 }
