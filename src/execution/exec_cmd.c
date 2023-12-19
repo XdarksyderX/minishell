@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 12:55:26 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 18:14:45 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	setup_redirection(t_command *cmd)
 		i = 0;
 		while (cmd->args[i])
 			i++;
-		cmd->args[i - 1] = NULL; //free if dynamically allocated
+		free(cmd->args[i]);
+		cmd->args[i - 1] = NULL;
 	}
 	if (ft_strncmp(cmd->stdin_redirect, "/dev/stdin", 11))
 	{
@@ -90,7 +91,7 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 		path = get_path(cmd_wargs[0], env);
 		path_allocated = true;
 	}
-	if (path == NULL) // redundant?
+	if (path == NULL) // redundant? less accurate error messages if removed
 	{
 		ft_free_array((void **)cmd_wargs);
 		perror("Cmd not found");
