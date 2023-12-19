@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:32:55 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 17:52:51 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:32:33 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ t_command	*ft_create_command(char *command)
 	}
 	new_cmd->args = create_args_array(tokens, arg_count);
 	new_cmd->next = NULL;
-	free(tokens); // Probably ft_free_array tokens
+	ft_free_array((void **)tokens);
 	return (new_cmd);
 }

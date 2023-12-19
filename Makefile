@@ -6,7 +6,7 @@
 #    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/12/18 17:35:05 by vnaslund         ###   ########.fr        #
+#    Updated: 2023/12/19 17:45:29 by vnaslund         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
 OBJ_DIR = obj/
 OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I/libft -g 
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -I/libft -g
 
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

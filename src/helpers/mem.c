@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:35:31 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/27 12:37:25 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:43:50 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,19 @@ void	ft_free_array(void **array)
 		free(array[i++]);
 	free (array);
 	array = NULL;
+}
+
+void	ft_free_cmd_list(t_command *cmd_list)
+{
+	t_command	*temp;
+
+	while (cmd_list)
+	{
+		ft_free_array((void **)cmd_list->args);
+		free(cmd_list->stdin_redirect);
+		free(cmd_list->stdout_redirect);
+		temp = cmd_list->next;
+		free(cmd_list);
+		cmd_list = temp;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 12:38:04 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 12:13:39 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 17:25:37 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ t_command	*ft_add_command(t_command *cmd_list, char *command);
 void		handle_redirection(t_command *cmd, char **tokens, int *i);
 char		**create_args_array(char **tokens, int arg_count);
 void		fill_default_redirections(t_command *cmd_list);
+void		ft_free_array(void **array);
 
 #endif
