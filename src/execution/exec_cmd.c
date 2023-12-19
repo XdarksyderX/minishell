@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 11:49:07 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 12:55:26 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	setup_redirection(t_command *cmd)
 	int	fd_out;
 	int	fd_in;
 	int	i;
-	//int	fd_err;
 
 	if (ft_strncmp(cmd->stdout_redirect, "/dev/stdout", 12))
 	{
@@ -83,7 +82,7 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 
 	setup_redirection(cmd_list);
 	if (ft_isbuiltin(cmd_wargs))
-		return (EXIT_SUCCESS);
+		exit(EXIT_SUCCESS);
 	if (ft_strchr(cmd_wargs[0], '/'))
 		path = cmd_wargs[0];
 	else
@@ -95,7 +94,7 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 	{
 		ft_free_array((void **)cmd_wargs);
 		perror("Cmd not found");
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	if (execve(path, cmd_wargs, env) == -1)
 	{
@@ -103,7 +102,7 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 			free(path);
 		ft_free_array((void **)cmd_wargs);
 		perror("Execve error");
-		return (EXIT_FAILURE);
+		exit(EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
