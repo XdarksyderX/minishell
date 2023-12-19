@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 18:25:04 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:49:07 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ void	setup_redirection(t_command *cmd)
 {
 	int	fd_out;
 	int	fd_in;
+	int	i;
 	//int	fd_err;
 
 	if (ft_strncmp(cmd->stdout_redirect, "/dev/stdout", 12))
@@ -55,9 +56,12 @@ void	setup_redirection(t_command *cmd)
 			perror("outfile open");
 			exit(EXIT_FAILURE);
 		}
-		printf("STDOUT REDIRECTION\n");
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
+		i = 0;
+		while (cmd->args[i])
+			i++;
+		cmd->args[i - 1] = NULL; //free if dynamically allocated
 	}
 	if (ft_strncmp(cmd->stdin_redirect, "/dev/stdin", 11))
 	{
@@ -67,7 +71,6 @@ void	setup_redirection(t_command *cmd)
 			perror("infile open");
 			exit(EXIT_FAILURE);
 		}
-		printf("STDIN REDIRECTION\n");
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}

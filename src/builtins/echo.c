@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 16:17:43 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/01 12:28:50 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/19 11:59:49 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,14 @@ void	print_exit_status(char *str, char *start)
 {
 	while (str != start)
 	{
-		write(1, str, 1);
+		write(STDOUT_FILENO, str, 1);
 		str++;
 	}
 	// print exit status from t_shell
 	str += 2;
 	while (*str)
 	{
-		write(1, str, 1);
+		write(STDOUT_FILENO, str, 1);
 		str++;
 	}
 }
@@ -49,11 +49,11 @@ int	ft_echo(char **cmd)
 				write(1, " ", 1);
 			continue ;
 		}
-		ft_putstr_fd(cmd[i++], 1);
+		ft_putstr_fd(cmd[i++], STDOUT_FILENO);
 		if (cmd[i])
 			write(1, " ", 1);
 	}
 	if (print_nl)
-		write(1, "\n", 1);
+		write(STDOUT_FILENO, "\n", 1);
 	return (EXIT_SUCCESS);
 }
