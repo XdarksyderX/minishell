@@ -27,4 +27,6 @@
 # include "debug.h"
 # include "execute.h"
 
+extern int g_interactive_mode;
+
 #endif
