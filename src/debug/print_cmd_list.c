@@ -11,8 +11,6 @@ void	debug_print_command(t_command *cmd)
 	}
 	if (cmd)
 	{
-		printf("Command Details:\n");
-		printf("  Command: %s\n", cmd->command);
 		printf("  Args");
 		while (cmd->args[i])
 			printf(": %s\n", cmd->args[i++]);

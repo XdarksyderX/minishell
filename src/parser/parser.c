@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:32:55 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 17:32:33 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:39:48 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ t_command	*ft_create_command(char *command)
 	tokens = ft_split(command, ' ');
 	i = -1;
 	arg_count = 0;
+	new_cmd->stdin_redirect = NULL;
+	new_cmd->stdout_redirect = NULL;
 	while (tokens[++i])
 	{
 		handle_redirection(new_cmd, tokens, &i);

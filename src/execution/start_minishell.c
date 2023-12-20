@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:20:47 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 17:53:46 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:30:07 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ void	start_minishell(t_command *cmd_list, char **env)
 			exit(0);
 		}
 		wait(NULL);
-		// ft_free_cmd_list(cmd_list); double free in some cases for some reason
+		ft_free_cmd_list(cmd_list);
+		cmd_list = NULL;
 	}
 }

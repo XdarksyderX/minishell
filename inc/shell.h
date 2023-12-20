@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:49:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 12:46:23 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:27:06 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 typedef struct s_command
 {
-	char				*command;
 	char				**args;
 	char				*stdin_redirect;
 	char				*stdout_redirect;
