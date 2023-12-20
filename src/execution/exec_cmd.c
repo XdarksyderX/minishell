@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 14:25:37 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:08:28 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	setup_redirection(t_command *cmd)
 		while (cmd->args[i])
 			i++;
 		free(cmd->args[i]);
+		free(cmd->args[i - 1]);
 		cmd->args[i - 1] = NULL;
 	}
 	if (ft_strncmp(cmd->stdin_redirect, "/dev/stdin", 11))

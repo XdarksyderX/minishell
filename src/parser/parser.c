@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 16:32:55 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 13:53:21 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:40:57 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,14 @@ t_command	*ft_create_command_list(char *input)
 	i = 0;
 	commands = ft_split(input, '|');
 	free(input);
+	cmd_list = NULL;
 	while (commands[i])
 	{
 		cmd_list = ft_add_command(cmd_list, commands[i]);
 		i++;
 	}
 	fill_default_redirections(cmd_list);
+	ft_free_array((void **)commands);
 	return (cmd_list);
 }
 

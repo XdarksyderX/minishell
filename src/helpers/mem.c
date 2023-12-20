@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:35:31 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 12:29:09 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 15:02:15 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,16 @@ void	ft_free_array(void **array)
 {
 	int	i;
 
+	if (!array)
+		return ;
 	i = 0;
 	while (array[i])
-		free(array[i++]);
-	free (array);
+	{
+		free(array[i]);
+		array[i] = NULL;
+		i++;
+	}
+	free(array);
 	array = NULL;
 }
 
