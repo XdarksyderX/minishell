@@ -27,6 +27,8 @@
 # include "debug.h"
 # include "execute.h"
 
-extern int g_interactive_mode;
+void	exit_handler(int status, t_command *cmd_list, char *msg);
+
+extern	int g_interactive_mode;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 12:22:57 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/18 16:18:29 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:14:39 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,16 @@ static int	exit_syntax_error(char *str)
 	return (0);
 }
 
-void	exit_handler(int status)
+void	exit_handler(int status, t_command *cmd_list, char *msg)
 {
-	//free memory
+	ft_free_cmd_list(cmd_list);
+	cmd_list = NULL;
+	if (msg)
+		perror(msg);
 	exit(status);
 }
 
-int	ft_exit(char **cmd)
+int	ft_exit(char **cmd, t_command *cmd_list)
 {
 	int	i;
 
@@ -77,20 +80,20 @@ int	ft_exit(char **cmd)
 	while (cmd[i])
 		i++;
 	if (i == 1)
-		exit_handler(0);
+		exit_handler(0, cmd_list, NULL);
 	else if (exit_syntax_error(cmd[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(cmd[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit_handler(255);
+		exit_handler(255, cmd_list, NULL);
 	}
 	else if (i != 2)
 	{
 		ft_putendl_fd("minishell: exit: too many arguments", 2);
-		return (EXIT_SUCCESS); // Weird behaviour but replicates bash, does not exit if 1 arg is numeric and there are too many args
+		return (EXIT_SUCCESS);
 	}
 	else
-		exit_handler(ft_atoi_longlong(cmd[1]) % 256);
+		exit_handler(ft_atoi_longlong(cmd[1]) % 256, cmd_list, NULL);
 	return (EXIT_SUCCESS);
 }

@@ -6,14 +6,14 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/11/30 14:54:04 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:19:09 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/builtins.h"
 
 //Use getcwd with NULL and 0 to dynamically allocate
-int	ft_pwd(void)
+void	ft_pwd(t_command *cmd_list)
 {
 	char	*cwd;
 	int		status;
@@ -30,5 +30,5 @@ int	ft_pwd(void)
 		perror("Error");
 		status = EXIT_FAILURE;
 	}
-	return (status);
+	exit_handler(status, cmd_list, NULL);
 }

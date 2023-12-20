@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:49:25 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/11 15:17:03 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2023/12/20 14:20:06 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@
 # include "helpers.h"
 # include "shell.h"
 
-int		ft_echo(char **cmd);
-int		ft_exit(char **cmd);
-int		ft_pwd(void);
+void	ft_echo(char **cmd, t_command *cmd_list);
+int		ft_exit(char **cmd, t_command *cmd_list);
+void	ft_pwd(t_command *cmd_list);
 int		ft_cd(char **cmd);
 int		ft_env(void);
 

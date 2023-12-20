@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/19 18:14:45 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/20 14:25:37 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ void	setup_redirection(t_command *cmd)
 	{
 		fd_out = open(cmd->stdout_redirect, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd_out == -1)
-		{
-			perror("outfile open");
-			exit(EXIT_FAILURE);
-		}
+			exit_handler(EXIT_FAILURE, cmd, "outfile open");
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 		i = 0;
@@ -67,10 +64,7 @@ void	setup_redirection(t_command *cmd)
 	{
 		fd_in = open(cmd->stdin_redirect, O_RDONLY);
 		if (fd_in == -1)
-		{
-			perror("infile open");
-			exit(EXIT_FAILURE);
-		}
+			exit_handler(EXIT_FAILURE, cmd, "infile open");
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
@@ -82,8 +76,7 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 	bool	path_allocated;
 
 	setup_redirection(cmd_list);
-	if (ft_isbuiltin(cmd_wargs))
-		exit(EXIT_SUCCESS);
+	ft_isbuiltin(cmd_wargs, cmd_list);
 	if (ft_strchr(cmd_wargs[0], '/'))
 		path = cmd_wargs[0];
 	else
@@ -91,19 +84,16 @@ int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 		path = get_path(cmd_wargs[0], env);
 		path_allocated = true;
 	}
-	if (path == NULL) // redundant? less accurate error messages if removed
+	if (path == NULL)
 	{
-		ft_free_array((void **)cmd_wargs);
 		perror("Cmd not found");
-		exit(EXIT_FAILURE);
+		exit_handler(EXIT_FAILURE, cmd_list, NULL);
 	}
 	if (execve(path, cmd_wargs, env) == -1)
 	{
 		if (path_allocated)
 			free(path);
-		ft_free_array((void **)cmd_wargs);
-		perror("Execve error");
-		exit(EXIT_FAILURE);
+		exit_handler(EXIT_FAILURE, cmd_list, "Execve error");
 	}
 	return (EXIT_SUCCESS);
 }
