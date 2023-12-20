@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd.c                                         :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/29 16:28:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 15:08:28 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/12/20 18:06:01 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/12/20 18:11:19 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,32 +69,4 @@ void	setup_redirection(t_command *cmd)
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
-}
-
-int	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
-{
-	char	*path;
-	bool	path_allocated;
-
-	setup_redirection(cmd_list);
-	ft_isbuiltin(cmd_wargs, cmd_list);
-	if (ft_strchr(cmd_wargs[0], '/'))
-		path = cmd_wargs[0];
-	else
-	{
-		path = get_path(cmd_wargs[0], env);
-		path_allocated = true;
-	}
-	if (path == NULL)
-	{
-		perror("Cmd not found");
-		exit_handler(EXIT_FAILURE, cmd_list, NULL);
-	}
-	if (execve(path, cmd_wargs, env) == -1)
-	{
-		if (path_allocated)
-			free(path);
-		exit_handler(EXIT_FAILURE, cmd_list, "Execve error");
-	}
-	return (EXIT_SUCCESS);
 }

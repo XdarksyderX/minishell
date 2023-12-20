@@ -6,7 +6,7 @@
 #    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/12/19 17:45:29 by vnaslund         ###   ########.fr        #
+#    Updated: 2023/12/20 18:07:30 by vnaslund         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,8 @@ NAME = minishell
 
 SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
 		  src/debug/print_cmd_list.c src/helpers/mem.c \
-		  src/execution/exec_cmd.c src/execution/start_minishell.c \
-		  src/execution/builtin_handler.c src/builtins/cd.c \
+		  src/execution/execute.c src/execution/start_minishell.c \
+		  src/execution/exec_utils.c src/execution/builtin_handler.c src/builtins/cd.c \
 		  src/builtins/exit.c src/builtins/pwd.c  src/builtins/echo.c
 
 OBJ_DIR = obj/
