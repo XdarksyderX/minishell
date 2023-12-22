@@ -12,7 +12,24 @@
 
 #include "../../inc/minishell.h"
 
-void	handle_pipes(t_command *cmd_list, char **cmd_wargs, char **env)
+void	child_process(t_command *cmd_list, int fd[2], int in_fd, char **env)
+{
+	if (in_fd != STDIN_FILENO)
+	{
+		dup2(in_fd, STDIN_FILENO);
+		close(in_fd);
+	}
+	if (cmd_list->next)
+	{
+		close(fd[0]);
+		dup2(fd[1], STDOUT_FILENO);
+		close(fd[1]);
+	}
+	setup_redirection(cmd_list);
+	exec_cmd(cmd_list, cmd_list->args, env);
+}
+
+void	handle_pipes(t_command *cmd_list, char **env)
 {
 	int	pid;
 	int	fd[2];
@@ -25,21 +42,7 @@ void	handle_pipes(t_command *cmd_list, char **cmd_wargs, char **env)
 			exit_handler(EXIT_FAILURE, cmd_list, "pipe");
 		pid = fork();
 		if (pid == 0)
-		{
-			if (in_fd != STDIN_FILENO)
-			{
-				dup2(in_fd, STDIN_FILENO);
-				close(in_fd);
-			}
-			if (cmd_list->next)
-			{
-				close(fd[0]);
-				dup2(fd[1], STDOUT_FILENO);
-				close(fd[1]);
-			}
-			setup_redirection(cmd_list);
-			exec_cmd(cmd_list, cmd_wargs, env);
-		}
+			child_process(cmd_list, fd, in_fd, env);
 		else
 		{
 			wait(NULL);
@@ -65,7 +68,7 @@ void	execute(t_command *cmd_list, char **cmd_wargs, char **env)
 		exec_cmd(cmd_list, cmd_wargs, env);
 	}
 	else
-		handle_pipes(cmd_list, cmd_wargs, env);
+		handle_pipes(cmd_list, env);
 }
 
 void	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
