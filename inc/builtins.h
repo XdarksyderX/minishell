@@ -27,6 +27,6 @@ void	ft_echo(char **cmd, t_command *cmd_list);
 int		ft_exit(char **cmd, t_command *cmd_list);
 void	ft_pwd(t_command *cmd_list);
 int		ft_cd(char **cmd);
-int		ft_env(char **envp);
+void	ft_env(char **envp, t_command *cmd_list);
 
 #endif
