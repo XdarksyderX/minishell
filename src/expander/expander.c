@@ -28,6 +28,8 @@ static char *get_expanded_var(char *input, t_shell *shell, size_t *i)
         return (NULL);
     if (ft_strncmp(var_name, "?", 1) == 0)
         var_value = ft_itoa(shell->last_exit_status);
+    else if (ft_strncmp(var_name, "$", 1) == 0)
+        var_value = "$";
     else
         var_value = ft_getenv(var_name, shell->env);
     var_start = *i;
