@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mem.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:35:31 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 15:02:15 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/27 14:58:11 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	ft_free_array(void **array)
 	array = NULL;
 }
 
-void	ft_free_cmd_list(t_command *cmd_list)
+void	*ft_free_cmd_list(t_command *cmd_list)
 {
 	t_command	*temp;
 
@@ -42,4 +42,5 @@ void	ft_free_cmd_list(t_command *cmd_list)
 		free(cmd_list);
 		cmd_list = temp;
 	}
+	return (NULL);
 }

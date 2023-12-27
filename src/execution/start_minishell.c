@@ -6,7 +6,7 @@
 /*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 16:20:47 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/22 22:16:30 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2023/12/27 20:33:39 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	ft_sighandler(void)
 	signal(SIGSTOP, SIG_IGN);
 }
 
-void	start_minishell(t_command *cmd_list, char **env)
+void	start_minishell(t_shell *shell)
 {
 	char	*input;
 	int		pid;
@@ -59,18 +59,15 @@ void	start_minishell(t_command *cmd_list, char **env)
 			add_history(input);
 		else
 			continue ;
-		input = ft_expand(input, env);
-		cmd_list = ft_create_command_list(input);
+		input = ft_expand(input, shell);
+		shell->top_command = ft_create_command_list(input);
 		g_interactive_mode = 0;
-		if (ft_is_cd_or_exit(cmd_list->args, cmd_list))
+		if (ft_is_cd_or_exit(shell->top_command->args, shell->top_command))
 			continue ;
-		//debug_print_cmd_list(cmd_list);
-		//continue;
 		pid = fork();
 		if (pid == 0)
-			execute(cmd_list, cmd_list->args, env);
+			execute(shell->top_command, shell->top_command->args, shell->env);
 		wait(NULL);
-		ft_free_cmd_list(cmd_list);
-		cmd_list = NULL;
+		shell->top_command = ft_free_cmd_list(shell->top_command);
 	}
 }

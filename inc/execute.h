@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/18 17:22:43 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 18:10:06 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/27 20:33:04 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "builtins.h"
 
-void	start_minishell(t_command *cmd_list, char **env);
+void	start_minishell(t_shell *shell);
 bool	ft_isbuiltin(char **cmd_wargs, t_command *cmd_list);
 bool	ft_is_cd_or_exit(char **cmd_wargs, t_command *cmd_list);
 

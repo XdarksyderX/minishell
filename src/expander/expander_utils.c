@@ -2,7 +2,7 @@
 
 int	is_valid_var_char(int c)
 {
-	return (ft_isalnum(c) || c == '_');
+	return (ft_isalnum(c) || c == '_' || c == '?');
 }
 
 char	*ft_get_first_env_var(char *str)
@@ -35,7 +35,7 @@ char	*ft_get_first_env_var(char *str)
 	return (NULL);
 }
 
-char	*ft_replace(const char *original, const char *insert,
+char	*ft_replace(char *original, const char *insert,
 	size_t start, size_t end)
 {
 	char	*new_str;

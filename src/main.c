@@ -6,7 +6,7 @@
 /*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 14:19:13 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/27 14:40:53 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2023/12/27 20:41:03 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,18 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	t_command	*cmd_list;
+	t_shell	*shell;
 
-	cmd_list = NULL;
+	shell = malloc(sizeof(t_shell));
+	if (!shell)
+		return (EXIT_FAILURE);
+	shell->env = env;
 	(void)argv;
 	if (argc != 1)
 	{
 		printf("This program does not accept arguments\n");
 		exit(127);
 	}
-	start_minishell(cmd_list, env);
+	start_minishell(shell);
 	return (EXIT_SUCCESS);
 }
