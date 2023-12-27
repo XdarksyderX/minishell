@@ -16,7 +16,7 @@
 # include "builtins.h"
 
 void	start_minishell(t_command *cmd_list, char **env);
-bool	ft_isbuiltin(char **cmd_wargs, t_command *cmd_list);
+void	ft_isbuiltin(char **cmd_wargs, t_command *cmd_list);
 bool	ft_is_cd_or_exit(char **cmd_wargs, t_command *cmd_list);
 
 void	execute(t_command *cmd_list, char **cmd_wargs, char **env);

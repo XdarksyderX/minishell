@@ -111,7 +111,7 @@ int	ft_setenv(char *env, char ***envp)
 	return (0);
 }
 
-int	ft_env(char **envp)
+void	ft_env(char **envp, t_command *cmd_list)
 {
 	int	i;
 
@@ -122,5 +122,5 @@ int	ft_env(char **envp)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
-	return (EXIT_SUCCESS);
+	exit_handler(EXIT_SUCCESS, cmd_list, NULL);
 }
