@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:49:25 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 14:20:06 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:25:39 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,6 @@ void	ft_echo(char **cmd, t_command *cmd_list);
 int		ft_exit(char **cmd, t_command *cmd_list);
 void	ft_pwd(t_command *cmd_list);
 int		ft_cd(char **cmd);
-int		ft_env(void);
+int		ft_env(char **envp);
 
 #endif

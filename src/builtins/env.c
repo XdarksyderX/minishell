@@ -3,87 +3,123 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
+/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 14:17:05 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/01 12:40:32 by vnaslund         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:32:50 by xdarksyderx      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/builtins.h"
 
-extern t_shell	g_shell;
-
-int	ft_getenv(char *env)
+int	ft_getenv_index(char *env, char **envp)
 {
-	int	i;
+	int		i;
+	size_t	name_len;
 
 	i = 0;
-	while (g_shell.env[i])
+	name_len = ft_strlen(env);
+	while (envp[i])
 	{
-		if (ft_strncmp(g_shell.env[i], env, ft_strlen(env)) == 0)
+		if (ft_strncmp(envp[i], env, name_len) == 0 && envp[i][name_len] == '=')
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-int	ft_unsetenv(char *env)
+char	*ft_getenv(char *env, char **envp)
+{
+	int		i;
+	char	*entry;
+	char	*value;
+	size_t	name_len;
+
+	i = 0;
+	name_len = ft_strlen(env);
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], env, name_len) == 0 && envp[i][name_len] == '=')
+		{
+			entry = envp[i] + name_len + 1;
+			value = strdup(entry);
+			return (value);
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+int	ft_unsetenv(char *env, char **envp)
 {
 	int	i;
 
-	if (env == NULL)
+	if (!env)
 		return (0);
-	i = ft_get_env(env);
+	i = ft_getenv_index(env, envp);
 	if (i != -1)
 	{
-		free(g_shell.env[i]);
-		g_shell.env[i] = NULL;
-		while (g_shell.env[i + 1])
+		free(envp[i]);
+		while (envp[i + 1])
 		{
-			g_shell.env[i] = g_shell.env[i + 1];
+			envp[i] = envp[i + 1];
 			i++;
 		}
+		envp[i] = NULL;
 	}
 	return (0);
 }
 
-int	ft_setenv(char *env)
+static char	**realloc_envp(char **envp, int size)
+{
+	char	**new_envp;
+	int		i;
+
+	new_envp = malloc(sizeof(char *) * (size + 1));
+	if (!new_envp)
+		return (NULL);
+	i = -1;
+	while (envp[++i] && i < size)
+	{
+		new_envp[i] = ft_strdup(envp[i]);
+		free(envp[i]);
+	}
+	new_envp[i] = NULL;
+	free(envp);
+	return (new_envp);
+}
+
+int	ft_setenv(char *env, char ***envp)
 {
 	int		i;
-	char	*tmp;
-	char	**new_envp;
 
 	i = 0;
-	while (g_shell.env[i])
+	while ((*envp)[i])
 	{
-		if (ft_strncmp(g_shell.env[i], env, ft_strlen(env)) == 0)
+		if (ft_strncmp((*envp)[i], env, ft_strlen(env)) == 0)
 		{
-			tmp = g_shell.env[i];
-			g_shell.env[i] = ft_strdup(env);
-			free(tmp);
-			exit(0);
+			free((*envp)[i]);
+			(*envp)[i] = ft_strdup(env);
+			return (0);
 		}
 		i++;
 	}
-	new_envp = malloc(sizeof(char *) * (i + 2));
-	i = -1;
-	while (g_shell.env[++i])
-		new_envp[i] = ft_strdup(g_shell.env[i]);
-	new_envp[i] = ft_strdup(env);
-	new_envp[i + 1] = NULL;
-	free(g_shell.env);
-	g_shell.env = new_envp;
+	*envp = realloc_envp(*envp, i + 1);
+	if (!(*envp))
+		return (-1);
+	(*envp)[i] = ft_strdup(env);
+	return (0);
 }
 
-int	ft_env(void)
+int	ft_env(char **envp)
 {
 	int	i;
 
 	i = 0;
-	while (g_shell.env[i])
+	while (envp[i])
 	{
-		printf("%s\n", g_shell.env[i]);
+		ft_putstr_fd(envp[i], STDOUT_FILENO);
+		ft_putchar_fd('\n', STDOUT_FILENO);
 		i++;
 	}
 	return (EXIT_SUCCESS);
