@@ -2,12 +2,16 @@
 
 static void	parent_process(t_shell *shell, int *in_fd, int fd[2])
 {
+	wait(NULL);
 	if (shell->top_command->next)
+	{
 		close(fd[1]);
-	if (*in_fd != STDIN_FILENO)
-		close(*in_fd);
-	if (shell->top_command->next)
+		if (*in_fd != STDIN_FILENO)
+			close(*in_fd);
 		*in_fd = fd[0];
+	}
+	else if (*in_fd != STDIN_FILENO)
+		close(*in_fd);
 }
 
 static void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
