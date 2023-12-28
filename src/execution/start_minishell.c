@@ -18,6 +18,7 @@ void	start_minishell(t_shell *shell)
 {
 	char	*input;
 	int		pid;
+	int		status;
 
 	ft_sighandler();
 	while (1)
@@ -38,7 +39,8 @@ void	start_minishell(t_shell *shell)
 		pid = fork();
 		if (pid == 0)
 			execute(shell, shell->top_command->args, shell->env);
-		wait(NULL);
+		waitpid(pid, &status, 0);
+		shell->last_exit_status = WEXITSTATUS(status);
 		shell->top_command = ft_free_cmd_list(shell->top_command);
 	}
 }
