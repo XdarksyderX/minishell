@@ -12,31 +12,31 @@
 
 #include "../../inc/minishell.h"
 
-bool	ft_is_cd_or_exit(char **cmd_wargs, t_command *cmd_list)
+bool	ft_is_cd_or_exit(char **cmd_wargs, t_shell *shell)
 {
 	if (!ft_strncmp(cmd_wargs[0], "cd", 5))
 	{
-		ft_cd(cmd_wargs);
+		shell->last_exit_status = ft_cd(cmd_wargs);
 		return (true);
 	}
 	if (!ft_strncmp(cmd_wargs[0], "exit", 5))
 	{
-		ft_exit(cmd_wargs, cmd_list);
+		ft_exit(cmd_wargs, shell);
 		return (true);
 	}
 	return (false);
 }
 
-void	ft_isbuiltin(char **cmd_wargs, t_command *cmd_list)
+void	ft_isbuiltin(char **cmd_wargs, t_shell *shell)
 {
 	if (!ft_strncmp(cmd_wargs[0], "echo", 5))
-		ft_echo(cmd_wargs, cmd_list);
+		ft_echo(cmd_wargs, shell);
 	if (!ft_strncmp(cmd_wargs[0], "pwd", 4))
-		ft_pwd(cmd_list);
+		ft_pwd(shell);
 	if (!ft_strncmp(cmd_wargs[0], "env", 4))
-		ft_env(cmd_wargs, cmd_list);
+		ft_env(cmd_wargs, shell);
 	//if (!ft_strncmp(cmd_wargs[0], "unset", 6))
-	//	ft_env(cmd_wargs, cmd_list);
+	//	ft_env(cmd_wargs, shell);
 	//if (!ft_strncmp(cmd_wargs[0], "export", 7))
-	//	ft_setenv(cmd_wargs, cmd_list);
+	//	ft_setenv(cmd_wargs, shell);
 }

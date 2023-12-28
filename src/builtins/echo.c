@@ -12,25 +12,8 @@
 
 #include "../../inc/minishell.h"
 
-void	print_exit_status(char *str, char *start)
+void	ft_echo(char **cmd, t_shell *shell)
 {
-	while (str != start)
-	{
-		write(STDOUT_FILENO, str, 1);
-		str++;
-	}
-	// print exit status from t_shell, maybe expander takes care of this
-	str += 2;
-	while (*str)
-	{
-		write(STDOUT_FILENO, str, 1);
-		str++;
-	}
-}
-
-void	ft_echo(char **cmd, t_command *cmd_list)
-{
-	char	*ptr;
 	int		i;
 	bool	print_nl;
 
@@ -41,19 +24,11 @@ void	ft_echo(char **cmd, t_command *cmd_list)
 	i--;
 	while (cmd[i])
 	{
-		ptr = ft_strnstr(cmd[i], "$?", ft_strlen(cmd[i]));
-		if (ptr)
-		{
-			print_exit_status(cmd[i++], ptr); // maybe expander takes care of this
-			if (cmd[i])
-				write(1, " ", 1);
-			continue ;
-		}
 		ft_putstr_fd(cmd[i++], STDOUT_FILENO);
 		if (cmd[i])
 			write(1, " ", 1);
 	}
 	if (print_nl)
 		write(STDOUT_FILENO, "\n", 1);
-	exit_handler(EXIT_SUCCESS, cmd_list, NULL);
+	exit_handler(EXIT_SUCCESS, shell, NULL);
 }

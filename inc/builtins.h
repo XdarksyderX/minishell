@@ -23,10 +23,10 @@
 # include "helpers.h"
 # include "shell.h"
 
-void	ft_echo(char **cmd, t_command *cmd_list);
-int		ft_exit(char **cmd, t_command *cmd_list);
-void	ft_pwd(t_command *cmd_list);
+void	ft_echo(char **cmd, t_shell *shell);
+int     ft_exit(char **cmd, t_shell *shell);
+void	ft_pwd(t_shell *shell);
 int		ft_cd(char **cmd);
-void	ft_env(char **envp, t_command *cmd_list);
+void	ft_env(char **envp, t_shell *shell);
 
 #endif

@@ -43,15 +43,11 @@ static char *get_expanded_var(char *input, t_shell *shell, size_t *i)
     return (ft_replace(input, var_value, var_start, var_end));
 }
 
-static char *expand_env_vars(char *input, t_shell *shell)
+static char *expand_env_vars(char *expanded, t_shell *shell)
 {
-    char    *expanded;
     char    *temp;
     size_t  i;
 
-    expanded = ft_strdup(input);
-    if (!expanded)
-        return (NULL);
     i = 0;
     while (expanded[i])
     {

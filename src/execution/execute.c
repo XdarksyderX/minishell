@@ -12,71 +12,71 @@
 
 #include "../../inc/minishell.h"
 
-void	child_process(t_command *cmd_list, int fd[2], int in_fd, char **env)
+void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
 {
 	if (in_fd != STDIN_FILENO)
 	{
 		dup2(in_fd, STDIN_FILENO);
 		close(in_fd);
 	}
-	if (cmd_list->next)
+	if (shell->top_command->next)
 	{
 		close(fd[0]);
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 	}
-	setup_redirection(cmd_list);
-	exec_cmd(cmd_list, cmd_list->args, env);
+	setup_redirection(shell);
+	exec_cmd(shell, shell->top_command->args, env);
 }
 
-void	handle_pipes(t_command *cmd_list, char **env)
+void	handle_pipes(t_shell *shell, char **env)
 {
 	int	pid;
 	int	fd[2];
 	int	in_fd;
 
 	in_fd = STDIN_FILENO;
-	while (cmd_list)
+	while (shell->top_command)
 	{
-		if (cmd_list->next && pipe(fd) < 0)
-			exit_handler(EXIT_FAILURE, cmd_list, "pipe");
+		if (shell->top_command->next && pipe(fd) < 0)
+			exit_handler(EXIT_FAILURE, shell, "pipe");
 		pid = fork();
 		if (pid == 0)
-			child_process(cmd_list, fd, in_fd, env);
-		else
+			child_process(shell, fd, in_fd, env);
+		else // make parent_process function
 		{
 			wait(NULL);
-			if (cmd_list->next)
+			if (shell->top_command->next)
 				close(fd[1]);
 			if (in_fd != STDIN_FILENO)
 				close(in_fd);
-			if (cmd_list->next)
+			if (shell->top_command->next)
 				in_fd = fd[0];
 		}
-		cmd_list = cmd_list->next;
+		shell->top_command = shell->top_command->next;
 	}
 	if (in_fd != STDIN_FILENO)
 		close(in_fd);
-	exit_handler(EXIT_SUCCESS, cmd_list, NULL);
+	exit_handler(EXIT_SUCCESS, shell, NULL);
 }
 
-void	execute(t_command *cmd_list, char **cmd_wargs, char **env)
+void	execute(t_shell *shell, char **cmd_wargs, char **env)
 {
-	if (!cmd_list->next)
+	if (!shell->top_command->next)
 	{
-		setup_redirection(cmd_list);
-		exec_cmd(cmd_list, cmd_wargs, env);
+		setup_redirection(shell);
+		exec_cmd(shell, cmd_wargs, env);
 	}
 	else
-		handle_pipes(cmd_list, env);
+		handle_pipes(shell, env);
 }
 
-void	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
+void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env)
 {
 	char	*path;
 	bool	path_allocated;
 
-	ft_isbuiltin(cmd_wargs, cmd_list);
+	ft_isbuiltin(cmd_wargs, shell);
 	if (ft_strchr(cmd_wargs[0], '/'))
 		path = cmd_wargs[0];
 	else
@@ -85,11 +85,11 @@ void	exec_cmd(t_command *cmd_list, char **cmd_wargs, char **env)
 		path_allocated = true;
 	}
 	if (path == NULL)
-		exit_handler(EXIT_FAILURE, cmd_list, "Cmd not found");
+		exit_handler(EXIT_FAILURE, shell, "Cmd not found");
 	if (execve(path, cmd_wargs, env) == -1)
 	{
 		if (path_allocated)
 			free(path);
-		exit_handler(EXIT_FAILURE, cmd_list, "Execve error");
+		exit_handler(EXIT_FAILURE, shell, "Execve error");
 	}
 }

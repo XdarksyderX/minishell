@@ -62,11 +62,11 @@ void	start_minishell(t_shell *shell)
 		input = ft_expand(input, shell);
 		shell->top_command = ft_create_command_list(input);
 		g_interactive_mode = 0;
-		if (ft_is_cd_or_exit(shell->top_command->args, shell->top_command))
+		if (ft_is_cd_or_exit(shell->top_command->args, shell))
 			continue ;
 		pid = fork();
 		if (pid == 0)
-			execute(shell->top_command, shell->top_command->args, shell->env);
+			execute(shell, shell->top_command->args, shell->env);
 		wait(NULL);
 		shell->top_command = ft_free_cmd_list(shell->top_command);
 	}

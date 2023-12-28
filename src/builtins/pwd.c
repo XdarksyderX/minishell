@@ -13,7 +13,7 @@
 #include "../../inc/builtins.h"
 
 //Use getcwd with NULL and 0 to dynamically allocate
-void	ft_pwd(t_command *cmd_list)
+void	ft_pwd(t_shell *shell)
 {
 	char	*cwd;
 	int		status;
@@ -30,5 +30,5 @@ void	ft_pwd(t_command *cmd_list)
 		perror("Error");
 		status = EXIT_FAILURE;
 	}
-	exit_handler(status, cmd_list, NULL);
+	exit_handler(status, shell, NULL);
 }

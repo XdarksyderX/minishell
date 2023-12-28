@@ -41,31 +41,32 @@ char	*get_path(char *cmd, char **env)
 	return (path);
 }
 
-void	setup_redirection(t_command *cmd)
+void	setup_redirection(t_shell *shell)
 {
 	int	fd_out;
 	int	fd_in;
 	int	i;
 
-	if (ft_strncmp(cmd->stdout_redirect, "/dev/stdout", 12))
+	if (ft_strncmp(shell->top_command->stdout_redirect, "/dev/stdout", 12))
 	{
-		fd_out = open(cmd->stdout_redirect, O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		fd_out = open(shell->top_command->stdout_redirect,
+				O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd_out == -1)
-			exit_handler(EXIT_FAILURE, cmd, "outfile open");
+			exit_handler(EXIT_FAILURE, shell, "outfile open");
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 		i = 0;
-		while (cmd->args[i])
+		while (shell->top_command->args[i])
 			i++;
-		free(cmd->args[i]);
-		free(cmd->args[i - 1]);
-		cmd->args[i - 1] = NULL;
+		free(shell->top_command->args[i]);
+		free(shell->top_command->args[i - 1]);
+		shell->top_command->args[i - 1] = NULL;
 	}
-	if (ft_strncmp(cmd->stdin_redirect, "/dev/stdin", 11))
+	if (ft_strncmp(shell->top_command->stdin_redirect, "/dev/stdin", 11))
 	{
-		fd_in = open(cmd->stdin_redirect, O_RDONLY);
+		fd_in = open(shell->top_command->stdin_redirect, O_RDONLY);
 		if (fd_in == -1)
-			exit_handler(EXIT_FAILURE, cmd, "infile open");
+			exit_handler(EXIT_FAILURE, shell, "infile open");
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}

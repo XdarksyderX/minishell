@@ -16,7 +16,7 @@ static int	cd_to_home(void)
 {
 	char	*path_to_home;
 
-	path_to_home = getenv("HOME");
+	path_to_home = getenv("HOME"); // Change to ft_
 	if (!path_to_home)
 	{
 		ft_putendl_fd("cd: HOME not set", 2);

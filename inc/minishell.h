@@ -28,6 +28,6 @@
 # include "execute.h"
 # include "expander.h"
 
-void	exit_handler(int status, t_command *cmd_list, char *msg);
+void	exit_handler(int status, t_shell *shell, char *msg);
 
 #endif

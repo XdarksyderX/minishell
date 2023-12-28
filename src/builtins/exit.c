@@ -62,16 +62,17 @@ static int	exit_syntax_error(char *str)
 	return (0);
 }
 
-void	exit_handler(int status, t_command *cmd_list, char *msg)
+void	exit_handler(int status, t_shell *shell, char *msg)
 {
-	ft_free_cmd_list(cmd_list);
-	cmd_list = NULL;
+	ft_free_cmd_list(shell->top_command);
+	shell->top_command = NULL;
 	if (msg)
 		perror(msg);
+	free(shell);
 	exit(status);
 }
 
-int	ft_exit(char **cmd, t_command *cmd_list)
+int	ft_exit(char **cmd, t_shell *shell)
 {
 	int	i;
 
@@ -80,13 +81,13 @@ int	ft_exit(char **cmd, t_command *cmd_list)
 	while (cmd[i])
 		i++;
 	if (i == 1)
-		exit_handler(0, cmd_list, NULL);
+		exit_handler(0, shell, NULL);
 	else if (exit_syntax_error(cmd[1]))
 	{
 		ft_putstr_fd("minishell: exit: ", 2);
 		ft_putstr_fd(cmd[1], 2);
 		ft_putendl_fd(": numeric argument required", 2);
-		exit_handler(255, cmd_list, NULL);
+		exit_handler(255, shell, NULL);
 	}
 	else if (i != 2)
 	{
@@ -94,6 +95,6 @@ int	ft_exit(char **cmd, t_command *cmd_list)
 		return (EXIT_SUCCESS);
 	}
 	else
-		exit_handler(ft_atoi_longlong(cmd[1]) % 256, cmd_list, NULL);
+		exit_handler(ft_atoi_longlong(cmd[1]) % 256, shell, NULL);
 	return (EXIT_SUCCESS);
 }
