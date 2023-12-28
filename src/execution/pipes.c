@@ -1,14 +1,13 @@
 #include "../../inc/minishell.h"
 
-static void	parent_process(t_shell *shell, int in_fd, int fd[2])
+static void	parent_process(t_shell *shell, int *in_fd, int fd[2])
 {
-	wait(NULL);
 	if (shell->top_command->next)
 		close(fd[1]);
-	if (in_fd != STDIN_FILENO)
-		close(in_fd);
+	if (*in_fd != STDIN_FILENO)
+		close(*in_fd);
 	if (shell->top_command->next)
-		in_fd = fd[0];
+		*in_fd = fd[0];
 }
 
 static void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
@@ -43,7 +42,7 @@ void	handle_pipes(t_shell *shell, char **env)
 		if (pid == 0)
 			child_process(shell, fd, in_fd, env);
 		else
-			parent_process(shell, in_fd, fd);
+			parent_process(shell, &in_fd, fd);
 		shell->top_command = shell->top_command->next;
 	}
 	if (in_fd != STDIN_FILENO)
