@@ -16,16 +16,17 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	*shell;
 
-	shell = malloc(sizeof(t_shell));
-	if (!shell)
-		return (EXIT_FAILURE);
-	shell->env = env;
-	(void)argv;
 	if (argc != 1)
 	{
 		printf("This program does not accept arguments\n");
 		exit(127);
 	}
+	shell = malloc(sizeof(t_shell));
+	if (!shell)
+		return (EXIT_FAILURE);
+	shell->env = env;
+	shell->last_exit_status = 0;
+	(void)argv;
 	start_minishell(shell);
 	return (EXIT_SUCCESS);
 }
