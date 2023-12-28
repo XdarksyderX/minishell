@@ -28,6 +28,7 @@
 # include "execute.h"
 # include "expander.h"
 
+void	ft_sighandler(void);
 void	exit_handler(int status, t_shell *shell, char *msg);
 
 #endif
