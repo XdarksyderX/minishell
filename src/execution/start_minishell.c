@@ -14,6 +14,20 @@
 
 int	g_interactive_mode;
 
+static char	*command_line(char *input)
+{
+	input = readline("minishell> ");
+	if (!input)
+		exit(0);
+	if (input[0])
+	{
+		add_history(input);
+		return (input);
+	}
+	else
+		return (NULL);
+}
+
 void	start_minishell(t_shell *shell)
 {
 	char	*input;
@@ -21,19 +35,16 @@ void	start_minishell(t_shell *shell)
 	int		status;
 
 	ft_sighandler();
+	input = NULL;
 	while (1)
 	{
 		g_interactive_mode = 1;
-		input = readline("minishell> ");
+		input = command_line(input);
 		if (!input)
-			exit(0);
-		if (input[0])
-			add_history(input);
-		else
 			continue ;
+		g_interactive_mode = 0;
 		input = ft_expand(input, shell);
 		shell->top_command = ft_create_command_list(input);
-		g_interactive_mode = 0;
 		if (ft_is_cd_or_exit(shell->top_command->args, shell))
 			continue ;
 		pid = fork();
