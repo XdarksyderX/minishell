@@ -37,7 +37,7 @@ void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env)
 		path_allocated = true;
 	}
 	if (path == NULL)
-		exit_handler(EXIT_FAILURE, shell, "Cmd not found");
+		exit_handler(CMD_NOT_FOUND, shell, "Cmd not found");
 	if (execve(path, cmd_wargs, env) == -1)
 	{
 		if (path_allocated)
