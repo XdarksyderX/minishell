@@ -34,7 +34,7 @@ void	ft_isbuiltin(char **cmd_wargs, t_shell *shell)
 	if (!ft_strncmp(cmd_wargs[0], "pwd", 4))
 		ft_pwd(shell);
 	if (!ft_strncmp(cmd_wargs[0], "env", 4))
-		ft_env(cmd_wargs, shell);
+		ft_env(shell->env, shell);
 	//if (!ft_strncmp(cmd_wargs[0], "unset", 6))
 	//	ft_env(cmd_wargs, shell);
 	//if (!ft_strncmp(cmd_wargs[0], "export", 7))
