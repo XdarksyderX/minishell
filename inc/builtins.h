@@ -14,17 +14,16 @@
 # define BUILTINS_H
 
 # include "../libft/libft.h"
-# include <stdbool.h>
-# include <limits.h>
-# include <signal.h>
-# include <sys/wait.h>
-# include <fcntl.h>
-
 # include "helpers.h"
 # include "shell.h"
+# include <fcntl.h>
+# include <limits.h>
+# include <signal.h>
+# include <stdbool.h>
+# include <sys/wait.h>
 
 void	ft_echo(char **cmd, t_shell *shell);
-int     ft_exit(char **cmd, t_shell *shell);
+int		ft_exit(char **cmd, t_shell *shell);
 void	ft_pwd(t_shell *shell);
 int		ft_cd(char **cmd);
 void	ft_env(char **envp, t_shell *shell);

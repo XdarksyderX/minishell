@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-extern int g_interactive_mode;
+extern int	g_interactive_mode;
 
 void	ft_ctrl_c(int signal)
 {
