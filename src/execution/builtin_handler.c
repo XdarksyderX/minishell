@@ -16,7 +16,7 @@ bool	ft_is_cd_or_exit(char **cmd_wargs, t_shell *shell)
 {
 	if (!ft_strncmp(cmd_wargs[0], "cd", 5))
 	{
-		shell->last_exit_status = ft_cd(cmd_wargs);
+		shell->last_exit_status = ft_cd(shell, cmd_wargs);
 		return (true);
 	}
 	if (!ft_strncmp(cmd_wargs[0], "exit", 5))
