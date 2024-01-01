@@ -67,6 +67,7 @@ char	*ft_replace(char *original, const char *insert,
 		return (NULL);
 	ft_strlcpy(new_str, original, start + 1);
 	ft_strlcpy(new_str + start, insert, len_insert + 1);
+	free((void *)insert);
 	ft_strlcpy(new_str + start + len_insert, original + end,
 		len_original - end + 1);
 	return (new_str);
