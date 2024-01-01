@@ -65,7 +65,7 @@ static int	exit_syntax_error(char *str)
 void	exit_handler(int status, t_shell *shell, char *msg)
 {
 	ft_free_cmd_list(shell->top_command);
-	shell->top_command = NULL;
+	ft_free_array((void **)shell->env);
 	if (msg)
 		perror(msg);
 	free(shell);

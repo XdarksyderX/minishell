@@ -45,7 +45,7 @@ void	start_minishell(t_shell *shell)
 		g_interactive_mode = 0;
 		input = ft_expand(input, shell);
 		shell->top_command = ft_create_command_list(input);
-		if (ft_is_cd_or_exit(shell->top_command->args, shell))
+		if (is_state_changing_builtin(shell->top_command->args, shell))
 			continue ;
 		pid = fork();
 		if (pid == 0)

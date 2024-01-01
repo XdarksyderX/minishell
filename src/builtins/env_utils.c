@@ -84,7 +84,7 @@ int	ft_setenv(char *env, char ***envp)
 	i = 0;
 	while ((*envp)[i])
 	{
-		if (ft_strncmp((*envp)[i], env, ft_strlen(env)) == 0)
+		if (ft_strncmp((*envp)[i], env, ft_strlen(env) + 1) == 0)
 		{
 			free((*envp)[i]);
 			(*envp)[i] = ft_strdup(env);

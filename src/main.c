@@ -12,6 +12,21 @@
 
 #include "../inc/minishell.h"
 
+void	init_shell(t_shell *shell, char **env)
+{
+	int	i;
+
+	i = 0;
+	while (env[i])
+		i++;
+	shell->env = (char **)malloc((i + 1) * sizeof(char *));
+	i = -1;
+	while (env[++i])
+		shell->env[i] = ft_strdup(env[i]);
+	shell->env[i] = NULL;
+	shell->last_exit_status = 0;
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	*shell;
@@ -24,8 +39,7 @@ int	main(int argc, char **argv, char **env)
 	shell = malloc(sizeof(t_shell));
 	if (!shell)
 		return (EXIT_FAILURE);
-	shell->env = env;
-	shell->last_exit_status = 0;
+	init_shell(shell, env);
 	(void)argv;
 	start_minishell(shell);
 	return (EXIT_SUCCESS);

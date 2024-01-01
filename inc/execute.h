@@ -16,8 +16,8 @@
 # include "builtins.h"
 
 void	start_minishell(t_shell *shell);
-void	ft_isbuiltin(char **cmd_wargs, t_shell *shell);
-bool	ft_is_cd_or_exit(char **cmd_wargs, t_shell *shell);
+bool	is_state_changing_builtin(char **cmd_wargs, t_shell *shell);
+void	execute_output_builtins(char **cmd_wargs, t_shell *shell);
 
 void	execute(t_shell *shell, char **cmd_wargs, char **env);
 void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env);

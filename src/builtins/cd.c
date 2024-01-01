@@ -25,10 +25,14 @@ static int	cd_to_home(t_shell *shell)
 	if (chdir(path_to_home) == -1)
 	{
 		perror("cd");
+		free(path_to_home);
 		return (EXIT_FAILURE);
 	}
 	else
+	{
+		free(path_to_home);
 		return (EXIT_SUCCESS);
+	}
 }
 
 int	ft_cd(t_shell *shell, char **cmd)

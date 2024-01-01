@@ -28,7 +28,7 @@ void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env)
 	char	*path;
 	bool	path_allocated;
 
-	ft_isbuiltin(cmd_wargs, shell);
+	execute_output_builtins(cmd_wargs, shell);
 	if (ft_strchr(cmd_wargs[0], '/'))
 		path = cmd_wargs[0];
 	else
