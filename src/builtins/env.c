@@ -44,7 +44,7 @@ int	ft_export(char **cmd, t_shell *shell)
 	while (cmd[++i])
 	{
 		if (ft_setenv(cmd[i], &shell->env) == -1)
-			return (-1);
+			return (1);
 	}
 	return (0);
 }
