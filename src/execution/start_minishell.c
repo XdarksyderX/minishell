@@ -14,11 +14,15 @@
 
 int	g_interactive_mode;
 
-static char	*command_line(char *input)
+static char	*command_line(char *input, t_shell *shell)
 {
 	input = readline("minishell> ");
 	if (!input)
+	{
+		ft_free_array((void **)shell->env);
+		free(shell);
 		exit(0);
+	}
 	if (input[0])
 	{
 		add_history(input);
@@ -39,7 +43,7 @@ void	start_minishell(t_shell *shell)
 	while (1)
 	{
 		g_interactive_mode = 1;
-		input = command_line(input);
+		input = command_line(input, shell);
 		if (!input)
 			continue ;
 		g_interactive_mode = 0;
