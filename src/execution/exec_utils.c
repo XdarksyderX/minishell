@@ -12,20 +12,12 @@
 
 #include "../../inc/minishell.h"
 
-char	*get_path(char *cmd, char **env)
+char	*test_paths(char **possible_paths, char *cmd)
 {
-	char	**possible_paths;
 	int		i;
 	char	*path;
 	char	*temp;
 
-	i = -1;
-	while (env[++i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-			break ;
-	}
-	possible_paths = ft_split(env[i] + 5, ':');
 	i = -1;
 	while (possible_paths[++i])
 	{
@@ -37,6 +29,25 @@ char	*get_path(char *cmd, char **env)
 		free(path);
 		path = NULL;
 	}
+	return (path);
+}
+
+char	*get_path(char *cmd, char **env)
+{
+	char	**possible_paths;
+	int		i;
+	char	*path;
+
+	i = -1;
+	while (env[++i])
+	{
+		if (ft_strncmp(env[i], "PATH=", 5) == 0)
+			break ;
+	}
+	if (!env[i])
+		return (NULL);
+	possible_paths = ft_split(env[i] + 5, ':');
+	path = test_paths(possible_paths, cmd);
 	ft_free_array((void **)possible_paths);
 	return (path);
 }

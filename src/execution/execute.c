@@ -34,10 +34,13 @@ void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env)
 	else
 	{
 		path = get_path(cmd_wargs[0], env);
+		if (path == NULL)
+		{
+			errno = ENOENT;
+			exit_handler(CMD_NOT_FOUND, shell, "Cmd not found");
+		}
 		path_allocated = true;
 	}
-	if (path == NULL)
-		exit_handler(CMD_NOT_FOUND, shell, "Cmd not found");
 	if (execve(path, cmd_wargs, env) == -1)
 	{
 		if (path_allocated)

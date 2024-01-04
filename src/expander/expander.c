@@ -20,6 +20,7 @@ static char	*get_expanded_var(char *input, t_shell *shell, size_t *i)
 {
 	char	*var_name;
 	char	*var_value;
+	char	*ret;
 	size_t	var_start;
 	size_t	var_end;
 
@@ -38,9 +39,10 @@ static char	*get_expanded_var(char *input, t_shell *shell, size_t *i)
 	free(var_name);
 	if (!var_value)
 		return (ft_replace(input, ft_strdup(""), var_start, var_end));
-	if (ft_strncmp(var_name, "?", 1) == 0)
+	ret = ft_replace(input, ft_strdup(var_value), var_start, var_end);
+	if (ft_strncmp(var_value, "$", 2))
 		free(var_value);
-	return (ft_replace(input, ft_strdup(var_value), var_start, var_end));
+	return (ret);
 }
 
 static char	*expand_env_vars(char *expanded, t_shell *shell)

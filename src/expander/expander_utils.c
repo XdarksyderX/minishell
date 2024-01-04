@@ -60,7 +60,10 @@ char	*ft_replace(char *original, const char *insert,
 	len_original = ft_strlen(original);
 	len_insert = ft_strlen(insert);
 	if (start > len_original || end > len_original || start > end)
+	{
+		free((void *)insert);
 		return (ft_strdup(original));
+	}
 	new_len = start + len_insert + (len_original - end);
 	new_str = (char *)malloc(new_len + 1);
 	if (!new_str)
