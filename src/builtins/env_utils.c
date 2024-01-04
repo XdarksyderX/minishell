@@ -83,12 +83,24 @@ void	*ft_realloc(void *ptr, size_t size)
 int	ft_setenv(char *env, char ***envp)
 {
 	int		i;
+	int		name_len;
+	char	*equal_sign;
 
-	i = 0;
-	if (!ft_strchr(env, '='))
+	equal_sign = ft_strchr(env, '=');
+	if (!equal_sign)
 		return (-1);
+	name_len = equal_sign - env;
+	i = 0;
 	while ((*envp)[i])
+	{
+		if (!ft_strncmp(env, (*envp)[i], name_len + 1))
+		{
+			free((*envp)[i]);
+			(*envp)[i] = ft_strdup(env);
+			return (0);
+		}
 		i++;
+	}
 	*envp = ft_realloc(*envp, (i + 2) * sizeof(char *));
 	if (!(*envp))
 		return (-1);
