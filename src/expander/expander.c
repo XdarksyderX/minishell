@@ -65,7 +65,32 @@ static char	*expand_env_vars(char *expanded, t_shell *shell)
 	return (expanded);
 }
 
+static char	*ft_delete_quotes(char *input)
+{
+	char	*new;
+	size_t	i;
+	size_t	j;
+
+	new = (char *)malloc(ft_strlen(input) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (input[i])
+	{
+		if (input[i] != '\'' && input[i] != '\"')
+		{
+			new[j] = input[i];
+			j++;
+		}
+		i++;
+	}
+	new[j] = '\0';
+	free(input);
+	return (new);
+}
+
 char	*ft_expand(char *input, t_shell *shell)
 {
-	return (expand_env_vars(input, shell));
+	return (ft_delete_quotes(expand_env_vars(input, shell)));
 }
