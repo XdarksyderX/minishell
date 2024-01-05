@@ -12,7 +12,7 @@
 
 NAME = minishell
 
-SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
+SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c src/parser/split_ignoring_quotes.c \
           src/expander/expander.c src/expander/expander_utils.c \
           src/debug/print_cmd_list.c src/helpers/mem.c src/helpers/signals.c \
           src/execution/execute.c src/execution/start_minishell.c src/execution/pipes.c \

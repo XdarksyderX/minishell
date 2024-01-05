@@ -15,8 +15,8 @@
 
 # define DELIMITERS "|"
 
-# include "shell.h"
 # include "builtins.h"
+# include "shell.h"
 
 t_command	*ft_create_command_list(char *input);
 t_command	*ft_create_command(char *command);
@@ -24,6 +24,7 @@ t_command	*ft_add_command(t_command *cmd_list, char *command);
 void		handle_redirection(t_command *cmd, char **tokens, int *i);
 char		**create_args_array(char **tokens, int arg_count);
 void		fill_default_redirections(t_command *cmd_list);
+char		**split_ignoring_quotes(char const *s, char c, bool del_quotes);
 void		ft_free_array(void **array);
 
 #endif

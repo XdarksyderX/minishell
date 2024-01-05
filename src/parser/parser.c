@@ -19,7 +19,7 @@ t_command	*ft_create_command_list(char *input)
 	int			i;
 
 	i = 0;
-	commands = ft_split(input, '|');
+	commands = split_ignoring_quotes(input, '|', false);
 	free(input);
 	cmd_list = NULL;
 	while (commands[i])
@@ -57,7 +57,7 @@ t_command	*ft_create_command(char *command)
 	new_cmd = malloc(sizeof(t_command));
 	if (!new_cmd)
 		return (NULL);
-	tokens = ft_split(command, ' ');
+	tokens = split_ignoring_quotes(command, ' ', true);
 	i = -1;
 	arg_count = 0;
 	new_cmd->stdin_redirect = NULL;
