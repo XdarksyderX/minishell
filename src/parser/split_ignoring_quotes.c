@@ -37,15 +37,36 @@ static size_t	nbr_of_strs(char const *s, char c)
 	return (ret);
 }
 
+size_t	ft_len_without_quotes(const char *str)
+{
+	size_t	i;
+	size_t	ret;
+
+	if (!str)
+		return (0);
+	ret = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] != '\'' && str[i] != '\"')
+			ret++;
+		i++;
+	}
+	return (ret);
+}
+
 static char	*ft_delete_quotes(char *input)
 {
 	char	*new;
 	size_t	i;
 	size_t	j;
 
-	new = (char *)malloc(ft_strlen(input) + 1);
+	new = (char *)malloc(ft_len_without_quotes(input) + 1);
 	if (!new)
+	{
+		free(input);
 		return (NULL);
+	}
 	i = 0;
 	j = 0;
 	while (input[i])
@@ -69,6 +90,8 @@ char	**split_ignoring_quotes(char const *s, char c, bool del_quotes)
 	int		i;
 
 	ret = (char **)malloc(sizeof(char *) * (nbr_of_strs(s, c) + 1));
+	if (!ret)
+		return (NULL);
 	i = 0;
 	while (*s)
 	{
