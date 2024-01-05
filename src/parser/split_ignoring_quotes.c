@@ -4,6 +4,8 @@ static size_t	skip_quoted(const char *s, char quote)
 {
 	size_t	len;
 
+	if (quote != '\"' && quote != '\'')
+		return (1);
 	len = 0;
 	while (s[++len])
 		if (s[len] == quote)
@@ -35,46 +37,51 @@ static size_t	nbr_of_strs(char const *s, char c)
 	return (ret);
 }
 
-static char	*process_substring(const char **s, char c, bool is_quoted, bool del)
+static char	*ft_delete_quotes(char *input)
 {
-	size_t	len;
-	char	*substring;
+	char	*new;
+	size_t	i;
+	size_t	j;
 
-	len = 0;
-	if (is_quoted)
+	new = (char *)malloc(ft_strlen(input) + 1);
+	if (!new)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (input[i])
 	{
-		len = skip_quoted(*s, **s);
-		if (!del)
-			substring = ft_substr(*s, 0, len);
-		else
-			substring = ft_substr(*s + 1, 0, len - 2);
-		*s += len;
+		if (input[i] != '\'' && input[i] != '\"')
+		{
+			new[j] = input[i];
+			j++;
+		}
+		i++;
 	}
-	else
-	{
-		while ((*s)[len] && (*s)[len] != c)
-			len++;
-		substring = ft_substr(*s, 0, len);
-		*s += len;
-	}
-	return (substring);
+	new[j] = '\0';
+	free(input);
+	return (new);
 }
 
 char	**split_ignoring_quotes(char const *s, char c, bool del_quotes)
 {
 	char	**ret;
+	size_t	len;
 	int		i;
 
-	i = 0;
 	ret = (char **)malloc(sizeof(char *) * (nbr_of_strs(s, c) + 1));
-	if (!ret)
-		return (NULL);
+	i = 0;
 	while (*s)
 	{
-		if (*s == '\"' || *s == '\'')
-			ret[i++] = process_substring(&s, c, true, del_quotes);
-		else if (*s != c)
-			ret[i++] = process_substring(&s, c, false, false);
+		len = 0;
+		if (*s != c)
+		{
+			while (s[len] && s[len] != c)
+				len += skip_quoted(&s[len], s[len]);
+			ret[i++] = ft_substr(s, 0, len);
+			if (del_quotes)
+				ret[i - 1] = ft_delete_quotes(ret[i - 1]);
+			s += len;
+		}
 		else
 			s++;
 	}
