@@ -12,6 +12,25 @@
 
 #include "../../inc/parser.h"
 
+void	handle_stdin_redir(t_command *cmd, char **tokens, int *i)
+{
+	if (ft_strncmp(tokens[*i], "<", 1) == 0)
+	{
+		if (tokens[*i][1] == '<')
+		{
+			// heredoc
+			cmd->stdin_redirect = ft_strdup(tokens[++(*i)]); // just to compile
+		}
+		else
+		{
+			if (ft_strlen(tokens[*i]) == 1)
+				cmd->stdin_redirect = ft_strdup(tokens[++(*i)]);
+			else
+				cmd->stdin_redirect = ft_strdup(tokens[(*i)] + 1);
+		}
+	}
+}
+
 void	handle_redirection(t_command *cmd, char **tokens, int *i)
 {
 	if (ft_strncmp(tokens[*i], ">", 1) == 0)
@@ -32,8 +51,7 @@ void	handle_redirection(t_command *cmd, char **tokens, int *i)
 				cmd->stdout_redirect = ft_strdup(tokens[(*i)] + 1);
 		}
 	}
-	else if (ft_strncmp(tokens[*i], "<", 1) == 0)
-		cmd->stdin_redirect = ft_strdup(tokens[++(*i)]);
+	handle_stdin_redir(cmd, tokens, i);
 }
 
 char	**create_args_array(char **tokens, int arg_count)
