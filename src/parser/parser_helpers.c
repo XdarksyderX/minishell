@@ -15,7 +15,23 @@
 void	handle_redirection(t_command *cmd, char **tokens, int *i)
 {
 	if (ft_strncmp(tokens[*i], ">", 1) == 0)
-		cmd->stdout_redirect = ft_strdup(tokens[++(*i)]);
+	{
+		if (tokens[*i][1] == '>')
+		{
+			if (ft_strlen(tokens[*i]) == 2)
+				cmd->stdout_redirect = ft_strdup(tokens[++(*i)]);
+			else
+				cmd->stdout_redirect = ft_strdup(tokens[(*i)] + 2);
+			cmd->append = true;
+		}
+		else
+		{
+			if (ft_strlen(tokens[*i]) == 1)
+				cmd->stdout_redirect = ft_strdup(tokens[++(*i)]);
+			else
+				cmd->stdout_redirect = ft_strdup(tokens[(*i)] + 1);
+		}
+	}
 	else if (ft_strncmp(tokens[*i], "<", 1) == 0)
 		cmd->stdin_redirect = ft_strdup(tokens[++(*i)]);
 }
@@ -33,8 +49,9 @@ char	**create_args_array(char **tokens, int arg_count)
 	j = 0;
 	while (tokens[++i])
 	{
-		if (ft_strncmp(tokens[i], ">", 1)
-			!= 0 && ft_strncmp(tokens[i], "<", 1) != 0)
+		if (tokens[i][0] == '>' || tokens[i][0] == '<')
+			break ;
+		else
 			args[j++] = ft_strdup(tokens[i]);
 	}
 	args[j] = NULL;

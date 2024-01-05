@@ -69,22 +69,19 @@ void	redirect_stdin(t_shell *shell)
 void	setup_redirection(t_shell *shell)
 {
 	int	fd_out;
-	int	i;
 
 	if (ft_strncmp(shell->top_command->stdout_redirect, "/dev/stdout", 12))
 	{
-		fd_out = open(shell->top_command->stdout_redirect,
-				O_WRONLY | O_CREAT | O_TRUNC, 0666);
+		if (shell->top_command->append)
+			fd_out = open(shell->top_command->stdout_redirect,
+					O_WRONLY | O_CREAT | O_APPEND, 0666);
+		else
+			fd_out = open(shell->top_command->stdout_redirect,
+					O_WRONLY | O_CREAT | O_TRUNC, 0666);
 		if (fd_out == -1)
 			exit_handler(EXIT_FAILURE, shell, "outfile open");
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
-		i = 0;
-		while (shell->top_command->args[i])
-			i++;
-		free(shell->top_command->args[i]);
-		free(shell->top_command->args[i - 1]);
-		shell->top_command->args[i - 1] = NULL;
 	}
 	redirect_stdin(shell);
 }

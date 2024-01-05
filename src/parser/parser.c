@@ -55,13 +55,12 @@ t_command	*ft_create_command(char *command)
 	int			arg_count;
 
 	new_cmd = malloc(sizeof(t_command));
-	if (!new_cmd)
-		return (NULL);
 	tokens = split_ignoring_quotes(command, ' ', true);
 	i = -1;
 	arg_count = 0;
 	new_cmd->stdin_redirect = NULL;
 	new_cmd->stdout_redirect = NULL;
+	new_cmd->append = false;
 	while (tokens[++i])
 	{
 		handle_redirection(new_cmd, tokens, &i);
