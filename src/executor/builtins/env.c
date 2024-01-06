@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/builtins.h"
+#include "../../../inc/builtins.h"
 
 void	ft_env(char **envp, t_shell *shell)
 {

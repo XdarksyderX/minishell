@@ -1,34 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/22 18:37:03 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 14:19:09 by vnaslund         ###   ########.fr       */
+/*   Created: 2023/11/22 16:17:43 by vnaslund          #+#    #+#             */
+/*   Updated: 2023/12/20 14:20:11 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/builtins.h"
+#include "../../../inc/minishell.h"
 
-//Use getcwd with NULL and 0 to dynamically allocate
-void	ft_pwd(t_shell *shell)
+void	ft_echo(char **cmd, t_shell *shell)
 {
-	char	*cwd;
-	int		status;
+	int		i;
+	bool	print_nl;
 
-	cwd = getcwd(NULL, 0);
-	if (cwd != NULL)
+	i = 1;
+	print_nl = true;
+	while (ft_strncmp(cmd[i++], "-n", 3) == 0)
+		print_nl = false;
+	i--;
+	while (cmd[i])
 	{
-		printf("%s\n", cwd);
-		free(cwd);
-		status = EXIT_SUCCESS;
+		ft_putstr_fd(cmd[i++], STDOUT_FILENO);
+		if (cmd[i])
+			write(1, " ", 1);
 	}
-	else
-	{
-		perror("Error");
-		status = EXIT_FAILURE;
-	}
-	exit_handler(status, shell, NULL);
+	if (print_nl)
+		write(STDOUT_FILENO, "\n", 1);
+	exit_handler(EXIT_SUCCESS, shell, NULL);
 }

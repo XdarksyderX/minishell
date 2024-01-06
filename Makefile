@@ -12,12 +12,15 @@
 
 NAME = minishell
 
-SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c src/parser/split_ignoring_quotes.c \
-          src/expander/expander.c src/expander/expander_utils.c \
-          src/debug/print_cmd_list.c src/helpers/mem.c src/helpers/signals.c \
-          src/execution/execute.c src/execution/start_minishell.c src/execution/pipes.c \
-          src/execution/exec_utils.c src/execution/builtin_handler.c src/builtins/env_utils.c \
-          src/builtins/cd.c src/builtins/env.c src/builtins/exit.c src/builtins/pwd.c src/builtins/echo.c \
+SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
+		  src/parser/split_ignoring_quotes.c src/expander/expander.c \
+		  src/expander/expander_utils.c src/debug/print_cmd_list.c \
+		  src/helpers/mem.c src/helpers/signals.c src/executor/execute.c \
+		  src/executor/start_minishell.c src/executor/pipes.c \
+		  src/executor/exec_utils.c src/executor/builtin_handler.c \
+		  src/executor/builtins/env_utils.c src/executor/builtins/cd.c \
+		  src/executor/builtins/env.c src/executor/builtins/exit.c \
+		  src/executor/builtins/pwd.c src/executor/builtins/echo.c \
 
 OBJ_DIR = obj/
 OBJECTS = $(SOURCES:%.c=$(OBJ_DIR)%.o)

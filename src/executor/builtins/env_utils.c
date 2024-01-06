@@ -1,4 +1,4 @@
-#include "../../inc/builtins.h"
+#include "../../../inc/builtins.h"
 
 int	ft_getenv_index(char *env, char **envp)
 {
