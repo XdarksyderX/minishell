@@ -16,7 +16,15 @@ static void	parent_process(t_shell *shell, int *in_fd, int fd[2])
 
 static void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
 {
-	if (in_fd != STDIN_FILENO)
+	int	heredoc_fd[2];
+
+	if (shell->top_command->heredoc)
+	{
+		if (pipe(heredoc_fd) < 0)
+			exit_handler(EXIT_FAILURE, shell, "pipe");
+		execute_heredoc(shell->top_command->delimiter, heredoc_fd);
+	}
+	else if (in_fd != STDIN_FILENO)
 	{
 		dup2(in_fd, STDIN_FILENO);
 		close(in_fd);
@@ -27,7 +35,7 @@ static void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 	}
-	setup_redirection(shell);
+	setup_redirection(shell, false);
 	exec_cmd(shell, shell->top_command->args, env);
 }
 

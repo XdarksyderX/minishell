@@ -23,7 +23,8 @@ void	execute(t_shell *shell, char **cmd_wargs, char **env);
 void	exec_cmd(t_shell *shell, char **cmd_wargs, char **env);
 void	handle_pipes(t_shell *shell, char **env);
 char	*get_path(char *cmd, char **env);
-void	setup_redirection(t_shell *shell);
+void	setup_redirection(t_shell *shell, bool handle_heredoc);
+void	execute_heredoc(char *delimiter, int heredoc_fd[2]);
 void	ft_free_array(void **array);
 
 #endif

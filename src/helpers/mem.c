@@ -38,6 +38,8 @@ void	*ft_free_cmd_list(t_command *cmd_list)
 		ft_free_array((void **)cmd_list->args);
 		free(cmd_list->stdin_redirect);
 		free(cmd_list->stdout_redirect);
+		if (cmd_list->heredoc)
+			free(cmd_list->delimiter);
 		temp = cmd_list->next;
 		free(cmd_list);
 		cmd_list = temp;

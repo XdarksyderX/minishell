@@ -52,8 +52,28 @@ char	*get_path(char *cmd, char **env)
 	return (path);
 }
 
-void	redirect_stdin(t_shell *shell)
+void	execute_heredoc(char *delimiter, int heredoc_fd[2])
 {
+	char	*line;
+
+	line = NULL;
+	while (1)
+	{
+		line = readline("> ");
+		if (!line || !ft_strncmp(line, delimiter, ft_strlen(delimiter) + 1))
+			break ;
+		write(heredoc_fd[1], line, ft_strlen(line));
+		write(heredoc_fd[1], "\n", 1);
+		free(line);
+	}
+	close(heredoc_fd[1]);
+	dup2(heredoc_fd[0], STDIN_FILENO);
+	close(heredoc_fd[0]);
+}
+
+void	redirect_stdin(t_shell *shell, bool handle_heredoc)
+{
+	int	heredoc_fd[2];
 	int	fd_in;
 
 	if (ft_strncmp(shell->top_command->stdin_redirect, "/dev/stdin", 11))
@@ -64,9 +84,15 @@ void	redirect_stdin(t_shell *shell)
 		dup2(fd_in, STDIN_FILENO);
 		close(fd_in);
 	}
+	if (shell->top_command->heredoc && handle_heredoc)
+	{
+		if (pipe(heredoc_fd) < 0)
+			exit_handler(1, shell, "pipe");
+		execute_heredoc(shell->top_command->delimiter, heredoc_fd);
+	}
 }
 
-void	setup_redirection(t_shell *shell)
+void	setup_redirection(t_shell *shell, bool handle_heredoc)
 {
 	int	fd_out;
 
@@ -83,5 +109,5 @@ void	setup_redirection(t_shell *shell)
 		dup2(fd_out, STDOUT_FILENO);
 		close(fd_out);
 	}
-	redirect_stdin(shell);
+	redirect_stdin(shell, handle_heredoc);
 }

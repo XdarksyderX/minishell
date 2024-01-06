@@ -16,7 +16,7 @@ void	execute(t_shell *shell, char **cmd_wargs, char **env)
 {
 	if (!shell->top_command->next)
 	{
-		setup_redirection(shell);
+		setup_redirection(shell, true);
 		exec_cmd(shell, cmd_wargs, env);
 	}
 	else

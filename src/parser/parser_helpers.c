@@ -14,12 +14,15 @@
 
 void	handle_stdin_redir(t_command *cmd, char **tokens, int *i)
 {
-	if (ft_strncmp(tokens[*i], "<", 1) == 0)
+	if (tokens[*i][0] == '<')
 	{
 		if (tokens[*i][1] == '<')
 		{
-			// heredoc
-			cmd->stdin_redirect = ft_strdup(tokens[++(*i)]); // just to compile
+			if (ft_strlen(tokens[*i]) == 2)
+				cmd->delimiter = ft_strdup(tokens[++(*i)]);
+			else
+				cmd->delimiter = ft_strdup(tokens[(*i)] + 2);
+			cmd->heredoc = true;
 		}
 		else
 		{
@@ -33,7 +36,7 @@ void	handle_stdin_redir(t_command *cmd, char **tokens, int *i)
 
 void	handle_redirection(t_command *cmd, char **tokens, int *i)
 {
-	if (ft_strncmp(tokens[*i], ">", 1) == 0)
+	if (tokens[*i][0] == '>')
 	{
 		if (tokens[*i][1] == '>')
 		{

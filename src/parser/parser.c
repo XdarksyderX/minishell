@@ -47,6 +47,15 @@ t_command	*ft_add_command(t_command *cmd_list, char *command)
 	return (cmd_list);
 }
 
+void	init_cmd(t_command *cmd)
+{
+	cmd->stdin_redirect = NULL;
+	cmd->stdout_redirect = NULL;
+	cmd->append = false;
+	cmd->heredoc = false;
+	cmd->delimiter = NULL;
+}
+
 t_command	*ft_create_command(char *command)
 {
 	t_command	*new_cmd;
@@ -55,12 +64,12 @@ t_command	*ft_create_command(char *command)
 	int			arg_count;
 
 	new_cmd = malloc(sizeof(t_command));
+	if (!new_cmd)
+		return (NULL);
+	init_cmd(new_cmd);
 	tokens = split_ignoring_quotes(command, ' ', true);
 	i = -1;
 	arg_count = 0;
-	new_cmd->stdin_redirect = NULL;
-	new_cmd->stdout_redirect = NULL;
-	new_cmd->append = false;
 	while (tokens[++i])
 	{
 		handle_redirection(new_cmd, tokens, &i);
