@@ -31,6 +31,8 @@
 void	ft_sighandler(void);
 void	exit_handler(int status, t_shell *shell, char *msg);
 
+int	g_interactive_mode;
+
 # define CMD_NOT_FOUND 127
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 18:06:01 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/20 18:11:19 by vnaslund         ###   ########.fr       */
+/*   Updated: 2024/01/08 17:59:19 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	execute_heredoc(char *delimiter, int heredoc_fd[2])
 	char	*line;
 
 	line = NULL;
+	g_interactive_mode = 1;
 	while (1)
 	{
 		line = readline("> ");
@@ -69,6 +70,7 @@ void	execute_heredoc(char *delimiter, int heredoc_fd[2])
 	close(heredoc_fd[1]);
 	dup2(heredoc_fd[0], STDIN_FILENO);
 	close(heredoc_fd[0]);
+	g_interactive_mode = 0;
 }
 
 void	redirect_stdin(t_shell *shell, bool handle_heredoc)
