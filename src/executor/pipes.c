@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:00:59 by vnaslund          #+#    #+#             */
-/*   Updated: 2024/01/08 12:01:01 by vnaslund         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:00:20 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,12 @@ static void	child_process(t_shell *shell, int fd[2], int in_fd, char **env)
 
 void	handle_pipes(t_shell *shell, char **env)
 {
-	int	pid;
-	int	fd[2];
-	int	in_fd;
+	t_command	*first;
+	int			pid;
+	int			fd[2];
+	int			in_fd;
 
+	first = shell->top_command;
 	in_fd = STDIN_FILENO;
 	while (shell->top_command)
 	{
@@ -71,5 +73,6 @@ void	handle_pipes(t_shell *shell, char **env)
 	}
 	if (in_fd != STDIN_FILENO)
 		close(in_fd);
+	shell->top_command = first;
 	exit_handler(EXIT_SUCCESS, shell, NULL);
 }
