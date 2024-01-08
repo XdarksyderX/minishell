@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 12:01:23 by vnaslund          #+#    #+#             */
-/*   Updated: 2024/01/08 12:01:24 by vnaslund         ###   ########.fr       */
+/*   Updated: 2024/01/08 12:35:19 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,24 +70,24 @@ int	ft_unsetenv(char *env, char **envp)
 	return (0);
 }
 
-void	*ft_realloc(void *ptr, size_t size)
+void	*ft_realloc(void *ptr, size_t new_size, size_t og_size)
 {
 	void	*new;
 
-	if (size == 0)
+	if (new_size == 0)
 	{
 		free(ptr);
 		return (NULL);
 	}
 	if (!ptr)
-		return (malloc(size));
-	new = malloc(size);
+		return (malloc(new_size));
+	new = malloc(new_size);
 	if (!new)
 	{
 		free(ptr);
 		return (NULL);
 	}
-	ft_memcpy(new, ptr, size);
+	ft_memcpy(new, ptr, og_size);
 	free(ptr);
 	return (new);
 }
@@ -113,7 +113,7 @@ int	ft_setenv(char *env, char ***envp)
 		}
 		i++;
 	}
-	*envp = ft_realloc(*envp, (i + 2) * sizeof(char *));
+	*envp = ft_realloc(*envp, (i + 2) * sizeof(char *), i * sizeof(char *));
 	if (!(*envp))
 		return (-1);
 	(*envp)[i] = ft_strdup(env);
