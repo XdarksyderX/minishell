@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_handler.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+        */
+/*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 14:17:23 by vnaslund          #+#    #+#             */
-/*   Updated: 2023/12/27 21:17:36 by xdarksyderx      ###   ########.fr       */
+/*   Updated: 2024/01/08 14:08:26 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ bool	is_state_changing_builtin(char **cmd_wargs, t_shell *shell)
 	if (!ft_strncmp(cmd_wargs[0], "exit", 5))
 	{
 		ft_exit(cmd_wargs, shell);
+		ft_free_cmd_list(shell->top_command);
 		return (true);
 	}
 	if (!ft_strncmp(cmd_wargs[0], "unset", 6))
