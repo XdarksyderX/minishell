@@ -6,7 +6,7 @@
 /*   By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 16:56:31 by vnaslund          #+#    #+#             */
-/*   Updated: 2024/01/09 18:03:06 by vnaslund         ###   ########.fr       */
+/*   Updated: 2024/01/30 17:31:14 by vnaslund         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	ft_ctrl_c(int signal)
 {
-	if (g_interactive_mode == -1)
-		exit(0);
+	if (g_interactive_mode == HEREDOC)
+		exit(1);
 	else if (g_interactive_mode)
 	{
 		(void)signal;
