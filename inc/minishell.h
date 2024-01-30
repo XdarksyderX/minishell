@@ -24,7 +24,6 @@
 
 # include "shell.h"
 # include "parser.h"
-# include "debug.h"
 # include "execute.h"
 # include "expander.h"
 
