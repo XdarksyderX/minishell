@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: xdarksyderx <xdarksyderx@student.42.fr>    +#+  +:+       +#+         #
+#    By: vnaslund <vnaslund@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/27 13:10:04 by vnaslund          #+#    #+#              #
-#    Updated: 2023/12/27 14:39:37 by xdarksyderx      ###   ########.fr        #
+#    Updated: 2024/01/30 14:35:15 by vnaslund         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 SOURCES = src/main.c src/parser/parser.c src/parser/parser_helpers.c \
 		  src/parser/split_ignoring_quotes.c src/expander/expander.c \
-		  src/expander/expander_utils.c src/debug/print_cmd_list.c \
+		  src/expander/expander_utils.c \
 		  src/helpers/mem.c src/helpers/signals.c src/executor/execute.c \
 		  src/executor/start_minishell.c src/executor/pipes.c \
 		  src/executor/exec_utils.c src/executor/builtin_handler.c \
